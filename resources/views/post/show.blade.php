@@ -59,7 +59,7 @@
                     <img src="{{ $post->imageUrl() }}" alt="{{ $post->title }}" class="w-full">
                 
                     <div class="mt-4">
-                        <div class="prose prose-lg max-w-none">
+                        <div class="prose prose-base max-w-none [&>*]:my-2 prose-headings:font-bold prose-headings:my-3 prose-h1:text-2xl prose-h2:text-xl prose-h3:text-lg prose-ul:list-disc prose-ol:list-decimal">
                             {!! $post->content !!}
                         </div>
                     </div>
