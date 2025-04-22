@@ -13,6 +13,7 @@
                         <x-input-label for="image" :value="__('Image')" />
                         <x-text-input id="image" class="block mt-1 w-full" type="file" name="image"
                             :value="old('image')" autofocus />
+                        <div id="image-preview-container" class="mt-2"></div>
                         <x-input-error :messages="$errors->get('image')" class="mt-2" />
                     </div>
 
@@ -111,4 +112,36 @@
     form.onsubmit = function() {
         document.querySelector('#content').value = quill.root.innerHTML;
     };
+
+    document.addEventListener('DOMContentLoaded', function() {
+    const imageInput = document.getElementById('image');
+    const previewContainer = document.getElementById('image-preview-container');
+    
+    imageInput.addEventListener('change', function() {
+        previewContainer.innerHTML = '';
+        
+        if (this.files && this.files[0]) {
+            // Add flex container for centering
+            previewContainer.className = 'mt-2 flex justify-center flex-col items-center';
+            
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                const preview = document.createElement('img');
+                preview.src = e.target.result;
+                preview.className = 'mt-2 rounded-md max-h-64 max-w-full';
+                preview.alt = 'Image Preview';
+                
+                const previewText = document.createElement('p');
+                previewText.className = 'text-sm text-gray-500 mt-1';
+                previewText.textContent = 'Preview of selected image';
+                
+                previewContainer.appendChild(preview);
+                previewContainer.appendChild(previewText);
+            }
+            
+            reader.readAsDataURL(this.files[0]);
+        }
+    });
+});
 </script>

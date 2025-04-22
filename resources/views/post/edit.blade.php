@@ -11,17 +11,20 @@
                     @csrf
                     @method('put')
 
+                    <!-- Image -->
                     @if ($post->imageUrl())
-                        <div class="mb-8">
-                            <img src="{{ $post->imageUrl() }}" alt="{{ $post->title }}" class="w-full">
-                        </div>
+                    <div class="mb-8 flex justify-center flex-col items-center" id="current-image-container">
+                        <p class="text-sm text-gray-500 mb-1">Current image:</p>
+                        <img src="{{ $post->imageUrl('preview') }}" alt="{{ $post->title }}" class="rounded-md max-h-64">
+                    </div>
                     @endif
-
+                
                     <!-- Image -->
                     <div>
                         <x-input-label for="image" :value="__('Image')" />
                         <x-text-input id="image" class="block mt-1 w-full" type="file" name="image"
                             :value="old('image')" autofocus />
+                        <div id="image-preview-container" class="mt-2"></div>
                         <x-input-error :messages="$errors->get('image')" class="mt-2" />
                     </div>
 
@@ -107,8 +110,8 @@
     // Re-highlight code blocks after content changes
     document.querySelectorAll('#editor-container pre.ql-syntax').forEach((block) => {
         hljs.highlightElement(block);
+        });
     });
-});
 
     // Optional: Also set initial content if there's old input
     @if(old('content'))
@@ -120,4 +123,55 @@
     form.onsubmit = function() {
         document.querySelector('#content').value = quill.root.innerHTML;
     };
+
+    document.addEventListener('DOMContentLoaded', function() {
+    const imageInput = document.getElementById('image');
+    const previewContainer = document.getElementById('image-preview-container');
+    const currentImageContainer = document.getElementById('current-image-container');
+    
+    // Center the current image if it exists
+    if (currentImageContainer) {
+        const currentImg = currentImageContainer.querySelector('img');
+        if (currentImg) {
+            currentImageContainer.classList.add('flex', 'justify-center', 'flex-col', 'items-center');
+        }
+    }
+    
+    imageInput.addEventListener('change', function() {
+        previewContainer.innerHTML = '';
+        
+        if (this.files && this.files[0]) {
+            // Hide current image when a new one is selected
+            if (currentImageContainer) {
+                currentImageContainer.style.display = 'none';
+            }
+            
+            // Add flex container for centering
+            previewContainer.className = 'mt-2 flex justify-center flex-col items-center';
+            
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                const preview = document.createElement('img');
+                preview.src = e.target.result;
+                preview.className = 'mt-2 rounded-md max-h-64 max-w-full';
+                preview.alt = 'New Image Preview';
+                
+                const previewText = document.createElement('p');
+                previewText.className = 'text-sm text-gray-500 mt-1';
+                previewText.textContent = 'Preview of new image';
+                
+                previewContainer.appendChild(preview);
+                previewContainer.appendChild(previewText);
+            }
+            
+            reader.readAsDataURL(this.files[0]);
+        } else {
+            // Show current image again if file selection is canceled
+            if (currentImageContainer) {
+                currentImageContainer.style.display = 'block';
+            }
+        }
+    });
+});
 </script>
