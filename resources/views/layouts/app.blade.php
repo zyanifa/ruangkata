@@ -10,6 +10,20 @@
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+        <link href="https://cdn.quilljs.com/1.3.7/quill.snow.css" rel="stylesheet">
+        <script src="https://cdn.quilljs.com/1.3.7/quill.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/default.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', (event) => {
+                // First phase: detect and highlight both normal and Quill code blocks
+                setTimeout(function() {
+                    document.querySelectorAll('pre code, pre.ql-syntax').forEach((block) => {
+                        hljs.highlightElement(block);
+                    });
+                }, 100); // Small timeout to ensure DOM is ready
+            });
+        </script>
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])

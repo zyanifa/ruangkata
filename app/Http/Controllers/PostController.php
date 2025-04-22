@@ -24,7 +24,8 @@ class PostController extends Controller
             ->withCount('claps')
             ->latest();
         if ($user) {
-            $ids = $user->following()->pluck('users.id');
+            $ids = $user->following()->pluck('users.id')->toArray();
+            $ids[] = $user->id;
             $query->whereIn('user_id', $ids);
         }
 
@@ -59,6 +60,9 @@ class PostController extends Controller
 
         // $imagePath = $image->store('posts', 'public');
         // $data['image'] = $imagePath;
+
+        // Sanitize the content to remove harmful HTML tags
+        $data['content'] = strip_tags($data['content'], '<p><a><b><i><strong><em><ul><ol><li><br><h1><h2><h3><h4><h5><h6><pre><code>');
 
         $post = Post::create($data);
 
@@ -102,6 +106,9 @@ class PostController extends Controller
             abort(403);
         }
         $data = $request->validated();
+
+        // Sanitize the content to allow only safe HTML tags
+        $data['content'] = strip_tags($data['content'], '<p><a><b><i><strong><em><ul><ol><li><br><h1><h2><h3><h4><h5><h6><pre><code>');
 
         $post->update($data);
 

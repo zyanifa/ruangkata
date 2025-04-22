@@ -16,9 +16,11 @@
                             
                             @auth
                                 &middot;
-                                <button x-text="following ? 'Unfollow' : 'Follow'" 
-                                :class="following ? 'text-red-600' : 'text-emerald-600'"
-                                @click="follow()">
+                                <button 
+                                    x-text="following ? 'Unfollow' : 'Follow'" 
+                                    :class="following ? 'text-red-600' : 'text-emerald-600'"
+                                    @click="follow()"
+                                    x-show="!isSelf">
                                 </button>
                             @endauth
                         </x-follow-ctr>
@@ -55,9 +57,11 @@
                 <!-- Content Section -->
                 <div class="mt-8">
                     <img src="{{ $post->imageUrl() }}" alt="{{ $post->title }}" class="w-full">
-
+                
                     <div class="mt-4">
-                        {{ $post->content }}
+                        <div class="prose prose-lg max-w-none">
+                            {!! $post->content !!}
+                        </div>
                     </div>
                 </div>
 
@@ -66,11 +70,16 @@
                         {{ $post->category->name }}
                     </span>
                 </div>
-
-                <!-- Clap Section -->
-                <x-clap-button :post="$post" />
-                <!-- Clap Section -->
             </div>
         </div>
     </div>
 </x-app-layout>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Apply highlighting specifically to the content area
+        document.querySelectorAll('.prose pre.ql-syntax').forEach((block) => {
+            hljs.highlightElement(block);
+        });
+    });
+</script>

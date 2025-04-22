@@ -1,3 +1,25 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* For code blocks in the editor */
+.ql-editor pre.ql-syntax {
+    background-color: #f3f4f6 !important;
+    color: #1f2937 !important;
+    border-radius: 0.375rem;
+    padding: 1em !important;
+    border: 1px solid #e5e7eb !important;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+    overflow-x: auto;
+}
+
+/* For code blocks in the displayed content */
+pre.ql-syntax {
+    background-color: #f3f4f6;
+    color: #1f2937;
+    border-radius: 0.375rem;
+    padding: 1em;
+    border: 1px solid #e5e7eb;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    overflow-x: auto;
+}
