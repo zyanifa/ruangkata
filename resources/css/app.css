@@ -23,3 +23,16 @@ pre.ql-syntax {
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
     overflow-x: auto;
 }
+
+/* Add these styles for Quill editor images */
+.prose img, .ql-editor img {
+    max-width: 100%;
+    height: auto;
+    margin: 1rem 0;
+    border-radius: 0.375rem;
+}
+
+.ql-editor .image-loading {
+    color: #666;
+    font-style: italic;
+}

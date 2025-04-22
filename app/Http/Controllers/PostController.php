@@ -62,7 +62,7 @@ class PostController extends Controller
         // $data['image'] = $imagePath;
 
         // Sanitize the content to remove harmful HTML tags
-        $data['content'] = strip_tags($data['content'], '<p><a><b><i><strong><em><ul><ol><li><br><h1><h2><h3><h4><h5><h6><pre><code>');
+        $data['content'] = strip_tags($data['content'], '<p><a><b><i><strong><em><ul><ol><li><br><h1><h2><h3><h4><h5><h6><pre><code><img>');
 
         $post = Post::create($data);
 
@@ -108,7 +108,7 @@ class PostController extends Controller
         $data = $request->validated();
 
         // Sanitize the content to allow only safe HTML tags
-        $data['content'] = strip_tags($data['content'], '<p><a><b><i><strong><em><ul><ol><li><br><h1><h2><h3><h4><h5><h6><pre><code>');
+        $data['content'] = strip_tags($data['content'], '<p><a><b><i><strong><em><ul><ol><li><br><h1><h2><h3><h4><h5><h6><pre><code><img>');
 
         $post->update($data);
 
