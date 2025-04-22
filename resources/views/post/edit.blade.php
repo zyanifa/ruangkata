@@ -59,17 +59,18 @@
                         <x-input-error :messages="$errors->get('category_id')" class="mt-2" />
                     </div>
 
-                    <!-- Content -->
-                    <div class="mt-4">
-                        <x-input-label for="content" :value="__('Content')" />
-                        <!-- Quill Editor Container -->
-                        <div id="editor-container" class="block mt-1 w-full border-gray-300 rounded-md shadow-sm" style="min-height: 400px; resize: vertical; overflow: auto;">
-                            {!! old('content', $post->content) !!}
-                        </div>
-                        <!-- Hidden Textarea to Store Quill Content -->
-                        <textarea id="content" name="content" style="display:none;">{{ old('content', $post->content) }}</textarea>
-                        <x-input-error :messages="$errors->get('content')" class="mt-2" />
-                    </div>
+<!-- Content -->
+<div class="mt-4">
+    <x-input-label for="content" :value="__('Content')" />
+    <div class="main-container">
+        <div class="editor-container editor-container_classic-editor" id="editor-container">
+            <div class="editor-container__editor">
+                <textarea id="editor" name="content">{{ old('content', $post->content) }}</textarea>
+            </div>
+        </div>
+    </div>
+    <x-input-error :messages="$errors->get('content')" class="mt-2" />
+</div>
                     
                     <!-- Published At -->
                     <div class="mt-4">
@@ -88,42 +89,7 @@
     </div>
 </x-app-layout>
 <script>
-    // Initialize Quill Editor
-    var quill = new Quill('#editor-container', {
-        theme: 'snow',
-        modules: {
-            toolbar: [
-                [{ header: [1, 2, 3, false] }],
-                ['bold', 'italic', 'underline', 'strike'],
-                [{ list: 'ordered' }, { list: 'bullet' }],
-                ['code-block'],
-                ['link', 'image'],
-                ['clean']
-            ]
-        }
-    });
-
-    // Update hidden textarea whenever content changes
-    quill.on('text-change', function() {
-    document.querySelector('#content').value = quill.root.innerHTML;
-    
-    // Re-highlight code blocks after content changes
-    document.querySelectorAll('#editor-container pre.ql-syntax').forEach((block) => {
-        hljs.highlightElement(block);
-        });
-    });
-
-    // Optional: Also set initial content if there's old input
-    @if(old('content'))
-    quill.root.innerHTML = `{!! old('content') !!}`;
-    @endif
-
-    // Still keep form submission handler as backup
-    var form = document.querySelector('form');
-    form.onsubmit = function() {
-        document.querySelector('#content').value = quill.root.innerHTML;
-    };
-
+    // Preview image before upload
     document.addEventListener('DOMContentLoaded', function() {
     const imageInput = document.getElementById('image');
     const previewContainer = document.getElementById('image-preview-container');

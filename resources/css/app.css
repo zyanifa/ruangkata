@@ -1,38 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* For code blocks in the editor */
-.ql-editor pre.ql-syntax {
-    background-color: #f3f4f6 !important;
-    color: #1f2937 !important;
-    border-radius: 0.375rem;
-    padding: 1em !important;
-    border: 1px solid #e5e7eb !important;
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
-    overflow-x: auto;
+@media print {
+	body {
+		margin: 0 !important;
+	}
 }
 
-/* For code blocks in the displayed content */
-pre.ql-syntax {
-    background-color: #f3f4f6;
-    color: #1f2937;
-    border-radius: 0.375rem;
-    padding: 1em;
-    border: 1px solid #e5e7eb;
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-    overflow-x: auto;
+.main-container {
+	font-family: 'Lato';
+	width: fit-content;
+	margin-left: auto;
+	margin-right: auto;
 }
 
-/* Add these styles for Quill editor images */
-.prose img, .ql-editor img {
-    max-width: 100%;
-    height: auto;
-    margin: 1rem 0;
-    border-radius: 0.375rem;
+.ck-content {
+	font-family: 'Lato';
+	line-height: 1.6;
+	word-break: break-word;
 }
 
-.ql-editor .image-loading {
-    color: #666;
-    font-style: italic;
+.editor-container_classic-editor .editor-container__editor {
+	min-width: 0px;
+	max-width: 795px;
+}
+
+/* Set minimum height and allow vertical resize */
+.ck-editor__editable_inline {
+    min-height: 450px !important; /* Minimum height */
+    resize: vertical !important;  /* Allow vertical resize */
+    overflow: auto !important;    /* Show scrollbar when needed */
+}
+
+/* Adjust the editor container */
+#editor {
+    min-height: 450px;
 }
