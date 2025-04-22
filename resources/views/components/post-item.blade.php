@@ -9,7 +9,7 @@
             </h5>
         </a>
         <div class="mb-3 font-normal text-gray-700">
-            {{ Str::words($post->content, 20) }}
+            {{ Str::words($post->short_description, 20) }}
         </div>
         <div class="text-sm text-gray-400 flex gap-4">
             <div class="">

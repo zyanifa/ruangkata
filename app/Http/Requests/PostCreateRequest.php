@@ -24,6 +24,7 @@ class PostCreateRequest extends FormRequest
         return [
             'image' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
             'title' => 'required',
+            'short_description' => 'required|string|max:255',
             'content' => 'required|string',
             'category_id' => ['required', 'exists:categories,id'],
             'published_at' => ['nullable', 'date'],

@@ -24,6 +24,14 @@
                         <x-input-error :messages="$errors->get('title')" class="mt-2" />
                     </div>
 
+                    <!-- Short Description -->
+                    <div class="mt-4">
+                        <x-input-label for="short_description" :value="__('Short Description')" />
+                        <x-text-input id="short_description" class="block mt-1 w-full" type="text" name="short_description"
+                            :value="old('short_description')" autofocus />
+                        <x-input-error :messages="$errors->get('short_description')" class="mt-2" />
+                    </div>
+
                     <!-- Category -->
                     <div class="mt-4">
                         <x-input-label for="category_id" :value="__('Category')" />

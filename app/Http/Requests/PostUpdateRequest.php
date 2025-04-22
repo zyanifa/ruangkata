@@ -24,6 +24,7 @@ class PostUpdateRequest extends FormRequest
         return [
             'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg,webp', 'max:2048'],
             'title' => 'required',
+            'short_description' => 'required|string|max:255',
             'content' => 'required',
             'category_id' => ['required', 'exists:categories,id'],
             'published_at' => ['nullable', 'date'],
