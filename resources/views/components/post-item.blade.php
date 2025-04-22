@@ -18,7 +18,7 @@
                     {{ $post->user->username }} 
                 </a>
                 at 
-                {{ $post->created_at->format('M d, Y') }}
+                {{ $post->created_at->format('d M Y') }}
             </div>
             <span class="inline-flex gap-1 items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
