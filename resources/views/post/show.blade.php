@@ -123,17 +123,65 @@
 </x-app-layout>
 
 <script>
+    let currentlyOpenForm = null; // Track the currently open form
+    
     function toggleEditForm(commentId, show) {
         const contentElement = document.getElementById(`comment-content-${commentId}`);
         const formElement = document.getElementById(`edit-form-${commentId}`);
         
+        // If we're trying to open a form and another form is already open, close it first
+        if (show && currentlyOpenForm && currentlyOpenForm !== formElement) {
+            // If the current form is an edit form, restore the comment content
+            if (currentlyOpenForm.id.startsWith('edit-form-')) {
+                const currentCommentId = currentlyOpenForm.id.replace('edit-form-', '');
+                document.getElementById(`comment-content-${currentCommentId}`).classList.remove('hidden');
+            }
+            
+            // Hide the currently open form
+            currentlyOpenForm.classList.add('hidden');
+            currentlyOpenForm = null;
+        }
+        
         if (show) {
             contentElement.classList.add('hidden');
             formElement.classList.remove('hidden');
+            currentlyOpenForm = formElement;
         } else {
             contentElement.classList.remove('hidden');
             formElement.classList.add('hidden');
+            if (currentlyOpenForm === formElement) {
+                currentlyOpenForm = null;
+            }
         }
+    }
+    
+    function toggleReplyForm(commentId) {
+        const replyForm = document.getElementById(`reply-form-${commentId}`);
+        
+        // If we're trying to open a form and another form is already open, close it first
+        if (!replyForm.classList.contains('hidden') && currentlyOpenForm === replyForm) {
+            // We're closing the current form
+            replyForm.classList.add('hidden');
+            currentlyOpenForm = null;
+            return;
+        }
+        
+        if (currentlyOpenForm && currentlyOpenForm !== replyForm) {
+            // If the current form is an edit form, restore the comment content
+            if (currentlyOpenForm.id.startsWith('edit-form-')) {
+                const currentCommentId = currentlyOpenForm.id.replace('edit-form-', '');
+                document.getElementById(`comment-content-${currentCommentId}`).classList.remove('hidden');
+            }
+            
+            // Hide the currently open form
+            currentlyOpenForm.classList.add('hidden');
+        }
+        
+        // Toggle the reply form visibility
+        replyForm.classList.toggle('hidden');
+        
+        // Update the currently open form reference
+        currentlyOpenForm = replyForm.classList.contains('hidden') ? null : replyForm;
     }
     
     document.addEventListener('DOMContentLoaded', function() {
