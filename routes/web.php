@@ -7,6 +7,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PublicProfileController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\ImageUploadController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -64,6 +65,9 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/report/{type}/{id}', [ReportController::class, 'showForm'])->name('report.form');
     Route::post('/report/{type}/{id}', [ReportController::class, 'store'])->name('report.store');
+
+    Route::post('/upload-image', [ImageUploadController::class, 'upload'])
+        ->name('image.upload');
 });
 
 require __DIR__ . '/auth.php';

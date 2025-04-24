@@ -237,12 +237,21 @@ const editorConfig = {
 			'toggleImageCaption',
 			'imageTextAlternative',
 			'|',
-			'imageStyle:inline',
-			'imageStyle:wrapText',
-			'imageStyle:breakText',
+			'imageStyle:alignLeft', 
+			'imageStyle:alignCenter',
+			'imageStyle:alignRight',
 			'|',
 			'resizeImage'
-		]
+		],
+		styles: {
+			options: [
+				'alignLeft',
+				'alignCenter',
+				'alignRight',
+				'block',
+				'side'
+			]
+		}
 	},
 	licenseKey: LICENSE_KEY,
 	link: {
@@ -268,7 +277,18 @@ const editorConfig = {
 	placeholder: 'Type or paste your content here!',
 	table: {
 		contentToolbar: ['tableColumn', 'tableRow', 'mergeTableCells', 'tableProperties', 'tableCellProperties']
-	}
+	},
+
+	simpleUpload: {
+        // The URL that the images are uploaded to.
+        uploadUrl: '/upload-image',
+
+        // Headers sent along with the XMLHttpRequest to the upload server.
+        headers: {
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        }
+    },
+
 };
 
 ClassicEditor.create(document.querySelector('#editor'), editorConfig)

@@ -101,3 +101,76 @@
 .prose blockquote p:last-of-type::after {
     content: none !important;
 }
+
+/* Basic image styling */
+.ck-content img {
+    max-width: 100%;
+    height: auto;
+    margin: 1em 0;
+}
+
+/* Figure and image container styling */
+.ck-content figure.image {
+    margin: 1.5em 0;
+    text-align: center;
+    clear: both;
+    display: table;
+}
+
+.ck-content figure.image img {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    min-width: 50px;
+}
+
+/* Caption styling */
+.ck-content figure.image figcaption {
+    color: #333;
+    background-color: #f7f7f7;
+    padding: .6em;
+    font-size: .75em;
+    outline-offset: -1px;
+    caption-side: bottom;
+    display: table-caption;
+}
+
+/* Image alignment styles */
+.ck-content figure.image.image-style-align-left {
+    float: left;
+    margin-right: 1.5em;
+    max-width: 50%;
+}
+
+.ck-content figure.image.image-style-align-right {
+    float: right;
+    margin-left: 1.5em;
+    max-width: 50%;
+}
+
+.ck-content figure.image.image-style-align-center {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* For block images that take full width */
+.ck-content figure.image.image-style-block {
+    display: block;
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+/* Fix for image width in side-by-side scenarios */
+.ck-content figure.image.image-style-side {
+    max-width: 50%;
+    float: right;
+    margin-left: 1.5em;
+}
+
+/* Clearfix to prevent layout issues with floated images */
+.ck-content::after {
+    content: "";
+    display: table;
+    clear: both;
+}

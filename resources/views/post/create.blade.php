@@ -51,8 +51,13 @@
                     <!-- Content -->
                     <div class="mt-4">
                         <x-input-label for="content" :value="__('Content')" />
-                        <x-input-textarea id="content" class="block mt-1 w-full" name="content"
-                            >{{ old('content') }}</x-input-textarea>
+                        <div class="main-container">
+                            <div class="editor-container editor-container_classic-editor" id="editor-container">
+                                <div class="editor-container__editor">
+                                    <textarea id="editor" name="content">{{ old('content') }}</textarea>
+                                </div>
+                            </div>
+                        </div>
                         <x-input-error :messages="$errors->get('content')" class="mt-2" />
                     </div>
 
