@@ -70,6 +70,16 @@ class Post extends Model implements HasMedia
         return $this->hasMany(Clap::class);
     }
 
+    public function comments()
+    {
+        return $this->hasMany(Comment::class)->whereNull('parent_id');
+    }
+
+    public function allComments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
     public function readTime($wordsPerMinute = 100)
     {
         $wordCount = str_word_count(strip_tags($this->content));

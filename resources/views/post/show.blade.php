@@ -70,13 +70,85 @@
                         {{ $post->category->name }}
                     </span>
                 </div>
+                
+                <!-- Comments Section -->
+                <div id="comments-section" class="mt-12 border-t pt-8">
+                    <h3 class="text-xl font-bold mb-6">Comments ({{ $post->allComments->count() }})</h3>
+                    
+                    @auth
+                        <x-comment-form :post="$post" />
+                    @else
+                        <div class="bg-gray-100 p-4 rounded-lg text-center">
+                            <p><a href="{{ route('login') }}" class="text-indigo-600 hover:underline">Login</a> or <a href="{{ route('register') }}" class="text-indigo-600 hover:underline">Register</a> to leave a comment</p>
+                        </div>
+                    @endauth
+                    
+                    <div class="mt-8 space-y-6">
+                        @forelse($comments as $comment)
+                            <div id="comment-{{ $comment->id }}">
+                                <x-comment-item :comment="$comment" :post="$post" />
+                            </div>
+                        @empty
+                            <p class="text-gray-500 text-center py-4">No comments yet. Be the first to comment!</p>
+                        @endforelse
+                    </div>
+                    
+                    <!-- Pagination -->
+                    <div class="mt-6">
+                        {{ $comments->fragment('comments-section')->links() }}
+                    </div>
+                </div>
+                <!-- End Comments Section -->
+
             </div>
         </div>
     </div>
 </x-app-layout>
 
 <script>
+    function toggleEditForm(commentId, show) {
+        const contentElement = document.getElementById(`comment-content-${commentId}`);
+        const formElement = document.getElementById(`edit-form-${commentId}`);
+        
+        if (show) {
+            contentElement.classList.add('hidden');
+            formElement.classList.remove('hidden');
+        } else {
+            contentElement.classList.remove('hidden');
+            formElement.classList.add('hidden');
+        }
+    }
+    
     document.addEventListener('DOMContentLoaded', function() {
+        // Check if URL has a hash fragment
+        if (window.location.hash) {
+            // Scroll to the element after a short delay to ensure DOM is fully loaded
+            setTimeout(function() {
+                const element = document.querySelector(window.location.hash);
+                if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                }
+            }, 300);
+        }
+        
+        // Handle pagination links
+        document.querySelectorAll('.pagination a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                // Store the current scroll position in localStorage
+                localStorage.setItem('commentScrollPosition', window.scrollY);
+            });
+        });
+        
+        // Check if we have a stored position
+        const savedPosition = localStorage.getItem('commentScrollPosition');
+        if (savedPosition !== null && !window.location.hash) {
+            setTimeout(() => {
+                window.scrollTo(0, parseInt(savedPosition));
+                // Clear the stored position
+                localStorage.removeItem('commentScrollPosition');
+            }, 300);
+        }
+        
         // Apply syntax highlighting to all code blocks
         document.querySelectorAll('pre code, .ck-code-block pre, .ck-code-block-content pre').forEach((block) => {
             hljs.highlightElement(block);
@@ -87,4 +159,10 @@
             hljs.highlightElement(element);
         });
     });
+
+    function deleteComment(commentId) {
+        if (confirm('Are you sure you want to delete this comment?')) {
+            document.getElementById(`delete-form-${commentId}`).submit();
+        }
+    }
 </script>

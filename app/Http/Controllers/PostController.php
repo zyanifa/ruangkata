@@ -75,12 +75,18 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $username, Post $post)
-    {
-        return view('post.show', [
-            'post' => $post,
-        ]);
-    }
+     public function show(string $username, Post $post)
+     {
+         $comments = $post->comments()
+             ->with(['user', 'replies.user'])
+             ->latest()
+             ->paginate(5);
+         
+         return view('post.show', [
+             'post' => $post,
+             'comments' => $comments,
+         ]);
+     }
 
     /**
      * Show the form for editing the specified resource.
