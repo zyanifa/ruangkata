@@ -35,20 +35,37 @@
                 </div>
                 <!-- User Avatar -->
 
-                @if ($post->user_id === Auth::id())
-                    <div class="py-4 mt-8 border-t border-b border-gray-200">
-                        <x-primary-button href="{{ route('post.edit', $post->slug) }}">
-                            Edit Post
-                        </x-primary-button>
-                        <form class="inline-block" action="{{ route('post.destroy', $post) }}" method="post">
-                            @csrf
-                            @method('delete')
-                            <x-danger-button>
-                                Delete Post
-                            </x-danger-button>
-                        </form>
-                    </div>
-                @endif
+                <div class="flex justify-between items-center mt-4">
+                    @if ($post->user_id === Auth::id())
+                        <div class="py-4 mt-4 border-t border-b border-gray-200">
+                            <x-primary-button href="{{ route('post.edit', $post->slug) }}">
+                                Edit Post
+                            </x-primary-button>
+                            <form class="inline-block" action="{{ route('post.destroy', $post) }}" method="post">
+                                @csrf
+                                @method('delete')
+                                <x-danger-button>
+                                    Delete Post
+                                </x-danger-button>
+                            </form>
+                        </div>
+                    @endif
+
+                    @auth
+                        @if ($post->user_id !== Auth::id())
+                            <div class="mt-2 ml-auto">
+                                <button
+                                    onclick="window.location.href='{{ route('report.form', ['type' => 'post', 'id' => $post->id]) }}'"
+                                    class="text-sm text-red-600 hover:text-red-800 flex items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 3v1.5M3 21v-6m0 0 2.77-.693a9 9 0 0 1 6.208.682l.108.054a9 9 0 0 0 6.086.71l3.114-.732a48.524 48.524 0 0 1-.005-10.499l-3.11.732a9 9 0 0 1-6.085-.711l-.108-.054a9 9 0 0 0-6.208-.682L3 4.5M3 15V4.5" />
+                                    </svg>
+                                    Laporkan Postingan
+                                </button>
+                            </div>
+                        @endif
+                    @endauth
+                </div>
 
                 <!-- Clap Section -->
                 <x-clap-button :post="$post" />

@@ -99,4 +99,14 @@ class Post extends Model implements HasMedia
         }
         return $media->getUrl();
     }
+
+    public function reports()
+    {
+        return $this->morphMany(Report::class, 'reportable');
+    }
+
+    public function reportCount()
+    {
+        return $this->reports()->count();
+    }
 }

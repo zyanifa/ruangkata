@@ -45,4 +45,14 @@ class Comment extends Model
     {
         return $this->edited_at !== null;
     }
+
+    public function reports()
+    {
+        return $this->morphMany(Report::class, 'reportable');
+    }
+
+    public function reportCount()
+    {
+        return $this->reports()->count();
+    }
 }
