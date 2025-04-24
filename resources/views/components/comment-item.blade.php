@@ -117,7 +117,10 @@
             
             <!-- Replies -->
             @if($comment->replies->count() > 0)
-                <div class="ml-0 mt-4 border-l-2 border-gray-200 pl-4">
+                <!-- Grey line break between main comment and replies -->
+                <hr class="my-4 border-gray-200">
+                
+                <div class="ml-0 mt-4 pl-4">
                     @foreach($comment->replies as $reply)
                         <div id="comment-{{ $reply->id }}" class="reply-item mb-3">
                             <div class="flex items-start">
@@ -219,6 +222,11 @@
                                 </div>
                             </div>
                         </div>
+                        
+                        <!-- Grey line break between replies (except after the last reply) -->
+                        @if(!$loop->last)
+                            <hr class="my-3 border-gray-200">
+                        @endif
                     @endforeach
                 </div>
             @endif
