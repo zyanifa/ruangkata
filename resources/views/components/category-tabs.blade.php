@@ -4,7 +4,7 @@
          request('category') 
          ? 'inline-block px-4 py-2 rounded-lg hover:text-gray-900 hover:bg-gray-100' 
          : 'inline-block px-4 py-2 text-white bg-blue-600 rounded-lg active' }}">
-            All
+            Semua
         </a>
     </li>
     @forelse ($categories as $category)

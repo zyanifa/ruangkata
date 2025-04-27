@@ -16,19 +16,31 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         User::factory()->create([
-            'name' => 'Test User',
-            'username' => 'testuser',
-            'email' => 'test@example.com'
+            'name' => 'beng',
+            'username' => 'beng',
+            'email' => 'beng@gmail.com'
         ]);
         
         $categories = [
-            'Technology',
-            'Health',
-            'Science',
-            'Sports',
-            'Politics',
-            'Entertainment',
+            'AI',
+            'Blockchain',
+            'Cloud Computing',
+            'Cyber Security',
+            'Data Science',
+            'Deep Learning',
+            'DevOps',
+            'Game Development',
+            'Internet of Things',
+            'Jaringan Komputer',
+            'Machine Learning',
+            'Mobile Development',
+            'Pemrograman',
+            'Robotika',
+            'Sistem Operasi',
+            'UI/UX Design',
+            'Web Development',
         ];
+        
 
         foreach ($categories as $category) {
             Category::create(['name' => $category]);
