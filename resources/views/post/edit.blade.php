@@ -2,7 +2,7 @@
     <div class="py-4">
         <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">
             <h1 class="text-3xl mb-4">
-                Update Post: <strong class="font-bold">{{ $post->title }}</strong>
+                Ubah Post: <strong class="font-bold">{{ $post->title }}</strong>
             </h1>
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-8">
                 <form action="{{  route('post.update', $post->id) }}" 
@@ -14,14 +14,14 @@
                     <!-- Image -->
                     @if ($post->imageUrl())
                     <div class="mb-8 flex justify-center flex-col items-center" id="current-image-container">
-                        <p class="text-sm text-gray-500 mb-1">Current image:</p>
+                        <p class="text-sm text-gray-500 mb-1">Foto thumbnail sekarang:</p>
                         <img src="{{ $post->imageUrl('preview') }}" alt="{{ $post->title }}" class="rounded-md max-h-64">
                     </div>
                     @endif
                 
                     <!-- Image -->
                     <div>
-                        <x-input-label for="image" :value="__('Image')" />
+                        <x-input-label for="image" :value="__('Foto Thumbnail')" />
                         <x-text-input id="image" class="block mt-1 w-full" type="file" name="image"
                             :value="old('image')" autofocus />
                         <div id="image-preview-container" class="mt-2"></div>
@@ -30,7 +30,7 @@
 
                     <!-- Title -->
                     <div class="mt-4">
-                        <x-input-label for="title" :value="__('Title')" />
+                        <x-input-label for="title" :value="__('Judul')" />
                         <x-text-input id="title" class="block mt-1 w-full" type="text" name="title"
                             :value="old('title', $post->title)" autofocus />
                         <x-input-error :messages="$errors->get('title')" class="mt-2" />
@@ -38,7 +38,7 @@
 
                     <!-- Short Description -->
                     <div class="mt-4">
-                        <x-input-label for="short_description" :value="__('Short Description')" />
+                        <x-input-label for="short_description" :value="__('Deskripsi Singkat')" />
                         <x-text-input id="short_description" class="block mt-1 w-full" type="text" name="short_description"
                             :value="old('short_description', $post->short_description)" autofocus />
                         <x-input-error :messages="$errors->get('short_description')" class="mt-2" />
@@ -46,7 +46,7 @@
                     
                     <!-- Category -->
                     <div class="mt-4">
-                        <x-input-label for="category_id" :value="__('Category')" />
+                        <x-input-label for="category_id" :value="__('Kategori')" />
                         <select id="category_id" name="category_id" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full">
                             <option value="">Select a Category</option>
                             @foreach ($categories as $category)
@@ -61,7 +61,7 @@
 
 <!-- Content -->
 <div class="mt-4">
-    <x-input-label for="content" :value="__('Content')" />
+    <x-input-label for="content" :value="__('Konten')" />
     <div class="main-container">
         <div class="editor-container editor-container_classic-editor" id="editor-container">
             <div class="editor-container__editor">
@@ -74,14 +74,14 @@
                     
                     <!-- Published At -->
                     <div class="mt-4">
-                        <x-input-label for="published_at" :value="__('Published At')" />
+                        <x-input-label for="published_at" :value="__('Waktu Publikasi')" />
                         <x-text-input id="published_at" class="block mt-1 w-full" type="datetime-local" name="published_at"
                             :value="old('published_at', $post->published_at)" autofocus />
                         <x-input-error :messages="$errors->get('published_at')" class="mt-2" />
                     </div>
 
                     <x-primary-button class="mt-4">
-                        Submit
+                        Ubah
                     </x-primary-button>
                 </form>
             </div>
@@ -121,11 +121,11 @@
                 const preview = document.createElement('img');
                 preview.src = e.target.result;
                 preview.className = 'mt-2 rounded-md max-h-64 max-w-full';
-                preview.alt = 'New Image Preview';
+                preview.alt = 'Foto thumbnail baru';
                 
                 const previewText = document.createElement('p');
                 previewText.className = 'text-sm text-gray-500 mt-1';
-                previewText.textContent = 'Preview of new image';
+                previewText.textContent = 'Preview foto thumbnail baru';
                 
                 previewContainer.appendChild(preview);
                 previewContainer.appendChild(previewText);

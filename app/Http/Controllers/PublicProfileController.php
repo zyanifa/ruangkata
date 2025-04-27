@@ -11,6 +11,7 @@ class PublicProfileController extends Controller
     {
         $posts = $user->posts()
             ->where('published_at', '<=', now())
+            ->withCount('claps')
             ->latest()
             ->paginate();
 

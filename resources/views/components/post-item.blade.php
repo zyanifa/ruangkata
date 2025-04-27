@@ -15,7 +15,7 @@
             <div class="">
                 oleh 
                 <a href="{{ route('profile.show', $post->user->username) }}" class="text-gray-600 hover:underline">
-                    {{ $post->user->username }} 
+                    {{ $post->user->username }}
                 </a>
                 pada 
                 {{ $post->created_at->format('d M Y') }}
