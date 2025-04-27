@@ -34,20 +34,22 @@ class ListCategoryPosts extends Page implements Tables\Contracts\HasTable
             )
             ->columns([
                 TextColumn::make('title')
+                    ->label('Judul')
                     ->sortable()
                     ->searchable()
                     ->url(function (Post $record): string {
                         return url("@{$record->user->username}/{$record->slug}");
                     }),
                 TextColumn::make('user.name')
-                    ->label('Author')
+                    ->label('Penulis')
                     ->sortable(),
                 TextColumn::make('published_at')
+                    ->label('Dipublikasikan Pada')
                     ->dateTime()
                     ->sortable(),
                 TextColumn::make('claps_count')
                     ->counts('claps')
-                    ->label('Claps')
+                    ->label('Jumlah Like')
                     ->sortable(),
             ])
             ->filters([
@@ -73,6 +75,6 @@ class ListCategoryPosts extends Page implements Tables\Contracts\HasTable
 
     public function getTitle(): string 
     {
-        return "Posts in {$this->category->name}";
+        return "Postingan pada kategori {$this->category->name}";
     }
 }

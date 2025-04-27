@@ -34,6 +34,7 @@ class ListUserPosts extends Page implements Tables\Contracts\HasTable
             )
             ->columns([
                 TextColumn::make('title')
+                    ->label('Judul')
                     ->sortable()
                     ->searchable()
                     ->url(function (Post $record): string {
@@ -41,16 +42,18 @@ class ListUserPosts extends Page implements Tables\Contracts\HasTable
                     })
                     ->openUrlInNewTab(),
                 TextColumn::make('category.name')
-                    ->label('Category')
+                    ->label('Kategori')
                     ->sortable(),
                 TextColumn::make('published_at')
+                    ->label('Dipublikasi pada')
                     ->dateTime()
                     ->sortable(),
                 TextColumn::make('claps_count')
                     ->counts('claps')
-                    ->label('Claps')
+                    ->label('Jumlah Like')
                     ->sortable(),
                 TextColumn::make('created_at')
+                    ->label('Dibuat pada')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -59,9 +62,6 @@ class ListUserPosts extends Page implements Tables\Contracts\HasTable
                 Tables\Filters\SelectFilter::make('category_id')
                     ->relationship('category', 'name')
                     ->label('Category'),
-                Tables\Filters\Filter::make('published')
-                    ->query(fn (Builder $query) => $query->whereNotNull('published_at'))
-                    ->label('Published Only'),
             ])
             ->actions([
                 Tables\Actions\Action::make('view')
@@ -82,7 +82,7 @@ class ListUserPosts extends Page implements Tables\Contracts\HasTable
                 ->url(UserResource::getUrl())
                 ->color('secondary'),
             Actions\Action::make('viewProfile')
-                ->label('View Public Profile')
+                ->label('Lihat Profil Pengguna')
                 ->url(url("@{$this->user->username}"))
                 ->openUrlInNewTab()
                 ->color('success')
@@ -92,11 +92,11 @@ class ListUserPosts extends Page implements Tables\Contracts\HasTable
 
     public function getTitle(): string 
     {
-        return "Posts by {$this->user->name}";
+        return "Postingan oleh {$this->user->name}";
     }
 
     public function getSubheading(): string
     {
-        return "@{$this->user->username} • {$this->user->posts->count()} posts";
+        return "@{$this->user->username} • {$this->user->posts->count()} postingan";
     }
 }

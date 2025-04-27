@@ -34,25 +34,31 @@ class ViewPostReports extends Page implements Tables\Contracts\HasTable
             )
             ->columns([
                 TextColumn::make('user.name')
-                    ->label('Reported By')
+                    ->label('Dilaporkan Oleh')
                     ->sortable(),
                 TextColumn::make('reason')
+                    ->label('Alasan')
                     ->formatStateUsing(fn (string $state) => Report::getReasons()[$state] ?? $state)
                     ->sortable(),
                 TextColumn::make('details')
+                    ->label('Rincian')
                     ->limit(50),
                 TextColumn::make('created_at')
+                    ->label('Dibuat Pada')
                     ->dateTime()
                     ->sortable(),
                 TextColumn::make('reviewed')
+                    ->label('Pemeriksaan')
                     ->badge()
                     ->color(fn (bool $state): string => $state ? 'success' : 'warning')
                     ->formatStateUsing(fn (bool $state): string => $state ? 'Reviewed' : 'Pending'),
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('reason')
+                    ->label('Alasan')
                     ->options(Report::getReasons()),
                 Tables\Filters\SelectFilter::make('reviewed')
+                    ->label('Status')
                     ->options([
                         '0' => 'Pending',
                         '1' => 'Reviewed',
@@ -60,13 +66,13 @@ class ViewPostReports extends Page implements Tables\Contracts\HasTable
             ])
             ->actions([
                 Tables\Actions\Action::make('mark_reviewed')
-                    ->label('Mark as Reviewed')
+                    ->label('Tandai Ditinjau')
                     ->visible(fn (Report $record) => !$record->reviewed)
                     ->action(fn (Report $record) => $record->update(['reviewed' => true]))
                     ->color('success')
                     ->icon('heroicon-o-check'),
                 Tables\Actions\Action::make('mark_pending')
-                    ->label('Mark as Pending')
+                    ->label('Tandai Pending')
                     ->visible(fn (Report $record) => $record->reviewed)
                     ->action(fn (Report $record) => $record->update(['reviewed' => false]))
                     ->color('warning')
@@ -86,27 +92,27 @@ class ViewPostReports extends Page implements Tables\Contracts\HasTable
     
     public function getTitle(): string 
     {
-        return "Reports for: {$this->record->title}";
+        return "Laporan postingan: {$this->record->title}";
     }
     
     protected function getHeaderActions(): array
     {
         return [
             Actions\Action::make('view_post')
-                ->label('View Post')
+                ->label('Lihat Postingan')
                 ->url(url("@{$this->record->user->username}/{$this->record->slug}"))
                 ->openUrlInNewTab()
                 ->color('success')
                 ->icon('heroicon-o-eye'),
             Actions\Action::make('delete_post')
-                ->label('Delete Post')
+                ->label('Hapus Postingan')
                 ->action(function () {
                     $this->record->delete();
                     return redirect()->to(PostReportResource::getUrl('index'));
                 })
                 ->requiresConfirmation()
-                ->modalHeading('Delete Post')
-                ->modalDescription('Are you sure you want to delete this post? This action cannot be undone.')
+                ->modalHeading('Hapus Postingan')
+                ->modalDescription('Apakah Anda yakin ingin menghapus postingan ini?')
                 ->color('danger')
                 ->icon('heroicon-o-trash'),
         ];

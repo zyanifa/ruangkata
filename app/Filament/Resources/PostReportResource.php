@@ -19,9 +19,9 @@ class PostReportResource extends Resource
     
     protected static ?string $navigationIcon = 'heroicon-o-flag';
     
-    protected static ?string $navigationGroup = 'Content Moderation';
+    protected static ?string $navigationGroup = 'Moderasi Konten';
     
-    protected static ?string $navigationLabel = 'Post Reports';
+    protected static ?string $navigationLabel = 'Laporan Postingan';
     
     protected static ?int $navigationSort = 1;
     
@@ -52,17 +52,19 @@ class PostReportResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('title')
+                    ->label('Judul')
                     ->searchable()
                     ->sortable()
                     ->url(fn (Post $record) => static::getUrl('view-reports', ['record' => $record])),
                 Tables\Columns\TextColumn::make('user.name')
-                    ->label('Author')
+                    ->label('Penulis')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('reports_count')
-                    ->label('Reports')
+                    ->label('Jumlah Laporan')
                     ->sortable()
                     ->alignCenter(),
                 Tables\Columns\TextColumn::make('published_at')
+                    ->label('Dipublikasikan pada')
                     ->dateTime('d M Y, H:i')
                     ->sortable(),
             ])
@@ -73,14 +75,14 @@ class PostReportResource extends Resource
             ->actions([
                 Tables\Actions\ActionGroup::make([
                     Tables\Actions\Action::make('view_post')
-                        ->label('View Post')
+                        ->label('Lihat Postingan')
                         ->url(fn (Post $record) => url("@{$record->user->username}/{$record->slug}"))
                         ->openUrlInNewTab()
                         ->icon('heroicon-o-eye'),
                     Tables\Actions\DeleteAction::make()
-                        ->label('Delete Post')
-                        ->modalHeading('Delete Post')
-                        ->modalDescription('Are you sure you want to delete this post? This action cannot be undone.'),
+                        ->label('Hapus Postingan')
+                        ->modalHeading('Hapus Postingan')
+                        ->modalDescription('Apakah Anda yakin ingin menghapus postingan ini?'),
                 ]),
             ])
             ->bulkActions([

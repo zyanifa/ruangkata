@@ -16,7 +16,9 @@ class CategoryResource extends Resource
     
     protected static ?string $navigationIcon = 'heroicon-o-tag';
     
-    protected static ?string $navigationGroup = 'Content Management';
+    protected static ?string $navigationGroup = 'Manajemen Konten';
+
+    protected static ?string $navigationLabel = 'Kategori';
     
     protected static ?int $navigationSort = 1;
 
@@ -25,6 +27,7 @@ class CategoryResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
+                    ->label('Nama Kategori')
                     ->required()
                     ->maxLength(255)
                     ->autofocus(),
@@ -36,19 +39,22 @@ class CategoryResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
+                    ->label('Nama')
                     ->searchable()
                     ->sortable()
                     ->url(fn (Category $record): string => 
                         static::getUrl('posts', ['record' => $record])),
                 Tables\Columns\TextColumn::make('posts_count')
-                    ->label('Posts')
+                    ->label('Jumlah Postingan')
                     ->counts('posts')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
+                    ->label('Dibuat Pada')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
+                    ->label('Diubah Pada')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -59,7 +65,7 @@ class CategoryResource extends Resource
             ->actions([
                 Tables\Actions\ActionGroup::make([
                     Tables\Actions\Action::make('posts')
-                        ->label('View Posts')
+                        ->label('Lihat Postingan')
                         ->url(fn (Category $record): string => 
                             static::getUrl('posts', ['record' => $record]))
                         ->icon('heroicon-o-eye'),

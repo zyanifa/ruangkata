@@ -34,25 +34,31 @@ class ViewCommentReports extends Page implements Tables\Contracts\HasTable
             )
             ->columns([
                 TextColumn::make('user.name')
-                    ->label('Reported By')
+                    ->label('Dilaporkan Oleh')
                     ->sortable(),
                 TextColumn::make('reason')
+                    ->label('Alasan')
                     ->formatStateUsing(fn (string $state) => Report::getReasons()[$state] ?? $state)
                     ->sortable(),
                 TextColumn::make('details')
+                    ->label('Rincian')
                     ->limit(50),
                 TextColumn::make('created_at')
+                    ->label('Dibuat Pada')
                     ->dateTime()
                     ->sortable(),
                 TextColumn::make('reviewed')
+                    ->label('Pemeriksaan')
                     ->badge()
                     ->color(fn (bool $state): string => $state ? 'success' : 'warning')
                     ->formatStateUsing(fn (bool $state): string => $state ? 'Reviewed' : 'Pending'),
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('reason')
+                    ->label('Alasan')
                     ->options(Report::getReasons()),
                 Tables\Filters\SelectFilter::make('reviewed')
+                    ->label('Status')
                     ->options([
                         '0' => 'Pending',
                         '1' => 'Reviewed',
@@ -60,13 +66,13 @@ class ViewCommentReports extends Page implements Tables\Contracts\HasTable
             ])
             ->actions([
                 Tables\Actions\Action::make('mark_reviewed')
-                    ->label('Mark as Reviewed')
+                    ->label('Tandai Ditinjau')
                     ->visible(fn (Report $record) => !$record->reviewed)
                     ->action(fn (Report $record) => $record->update(['reviewed' => true]))
                     ->color('success')
                     ->icon('heroicon-o-check'),
                 Tables\Actions\Action::make('mark_pending')
-                    ->label('Mark as Pending')
+                    ->label('Tandai Pending')
                     ->visible(fn (Report $record) => $record->reviewed)
                     ->action(fn (Report $record) => $record->update(['reviewed' => false]))
                     ->color('warning')
@@ -75,7 +81,7 @@ class ViewCommentReports extends Page implements Tables\Contracts\HasTable
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\BulkAction::make('mark_reviewed')
-                        ->label('Mark as Reviewed')
+                        ->label('Tandai Ditinjau')
                         ->action(fn ($records) => $records->each->update(['reviewed' => true]))
                         ->color('success')
                         ->icon('heroicon-o-check'),
@@ -86,27 +92,27 @@ class ViewCommentReports extends Page implements Tables\Contracts\HasTable
     
     public function getTitle(): string 
     {
-        return "Reports for Comment";
+        return "Laporan Komentar";
     }
     
     protected function getHeaderActions(): array
     {
         return [
             Actions\Action::make('view_comment')
-                ->label('View Comment')
+                ->label('Lihat Komentar')
                 ->url(url("@{$this->record->post->user->username}/{$this->record->post->slug}#comment-{$this->record->id}"))
                 ->openUrlInNewTab()
                 ->color('success')
                 ->icon('heroicon-o-eye'),
             Actions\Action::make('delete_comment')
-                ->label('Delete Comment')
+                ->label('Hapus Komentar')
                 ->action(function () {
                     $this->record->delete();
                     return redirect()->to(CommentReportResource::getUrl('index'));
                 })
                 ->requiresConfirmation()
-                ->modalHeading('Delete Comment')
-                ->modalDescription('Are you sure you want to delete this comment? This action cannot be undone.')
+                ->modalHeading('Hapus Komentar')
+                ->modalDescription('Apakah Anda yakin ingin menghapus komentar ini?')
                 ->color('danger')
                 ->icon('heroicon-o-trash'),
         ];

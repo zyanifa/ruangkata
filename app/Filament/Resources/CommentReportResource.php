@@ -19,9 +19,9 @@ class CommentReportResource extends Resource
     
     protected static ?string $navigationIcon = 'heroicon-o-chat-bubble-left';
     
-    protected static ?string $navigationGroup = 'Content Moderation';
+    protected static ?string $navigationGroup = 'Moderasi Konten';
     
-    protected static ?string $navigationLabel = 'Comment Reports';
+    protected static ?string $navigationLabel = 'Laporan Komentar';
     
     protected static ?int $navigationSort = 2;
 
@@ -37,9 +37,11 @@ class CommentReportResource extends Resource
         return $form
             ->schema([
                 Forms\Components\Textarea::make('content')
+                    ->label('Isi Komentar')
                     ->required()
                     ->columnSpanFull(),
                 Forms\Components\TextInput::make('reports_count')
+                    ->label('Jumlah Laporan')
                     ->label('Report Count')
                     ->disabled(),
             ]);
@@ -50,20 +52,23 @@ class CommentReportResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('content')
+                    ->label('Isi Komentar')
                     ->limit(50)
                     ->searchable()
                     ->url(fn (Comment $record) => static::getUrl('view-reports', ['record' => $record])),
                 Tables\Columns\TextColumn::make('user.name')
-                    ->label('Author')
+                    ->label('Pembuat')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('post.title')
+                    ->label('Judul Postingan')
                     ->limit(30)
                     ->sortable(),
                 Tables\Columns\TextColumn::make('reports_count')
-                    ->label('Reports')
+                    ->label('Jumlah Laporan')
                     ->sortable()
                     ->alignCenter(),
                 Tables\Columns\TextColumn::make('created_at')
+                    ->label('Komentar Dibuat Pada')
                     ->dateTime('d M Y, H:i')
                     ->sortable(),
             ])
@@ -74,14 +79,14 @@ class CommentReportResource extends Resource
             ->actions([
                 Tables\Actions\ActionGroup::make([
                     Tables\Actions\Action::make('view_comment')
-                        ->label('View Comment')
+                        ->label('Lihat Komentar')
                         ->url(fn (Comment $record) => url("@{$record->post->user->username}/{$record->post->slug}#comment-{$record->id}"))
                         ->openUrlInNewTab()
                         ->icon('heroicon-o-eye'),
                     Tables\Actions\DeleteAction::make()
-                        ->label('Delete Comment')
-                        ->modalHeading('Delete Comment')
-                        ->modalDescription('Are you sure you want to delete this comment? This action cannot be undone.')
+                        ->label('Hapus Komentar')
+                        ->modalHeading('Hapus Komentar')
+                        ->modalDescription('Apakah Anda yakin ingin menghapus komentar ini?')
                         ->successRedirectUrl(CommentReportResource::getUrl('index')),
                 ]),
             ])
