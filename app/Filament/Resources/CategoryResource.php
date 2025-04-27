@@ -37,7 +37,9 @@ class CategoryResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->searchable()
-                    ->sortable(),
+                    ->sortable()
+                    ->url(fn (Category $record): string => 
+                        static::getUrl('posts', ['record' => $record])),
                 Tables\Columns\TextColumn::make('posts_count')
                     ->label('Posts')
                     ->counts('posts')
@@ -56,7 +58,10 @@ class CategoryResource extends Resource
             ])
             ->actions([
                 Tables\Actions\ActionGroup::make([
-                    Tables\Actions\ViewAction::make(),
+                    Tables\Actions\Action::make('posts')
+                        ->label('View Posts')
+                        ->url(fn (Category $record): string => 
+                            static::getUrl('posts', ['record' => $record])),
                     Tables\Actions\EditAction::make(),
                     Tables\Actions\DeleteAction::make(),
                 ]),
@@ -81,6 +86,7 @@ class CategoryResource extends Resource
             'index' => Pages\ListCategories::route('/'),
             'create' => Pages\CreateCategory::route('/create'),
             'edit' => Pages\EditCategory::route('/{record}/edit'),
+            'posts' => Pages\ListCategoryPosts::route('/{record}/posts'),
         ];
     }
 }
