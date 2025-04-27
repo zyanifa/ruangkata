@@ -115,4 +115,9 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia, Filamen
     {
         return $this->is_admin;
     }
+
+    public function reports()
+    {
+        return $this->hasMany(Report::class);
+    }
 }
