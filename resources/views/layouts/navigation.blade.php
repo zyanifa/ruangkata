@@ -15,7 +15,10 @@
             <div class="flex">
                 <a href="{{ route('post.create') }}" class="flex items-center">
                     <x-primary-button>
-                        Create Post
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                        </svg>
+                        BUAT POST
                     </x-primary-button>
                 </a>
 
@@ -36,22 +39,32 @@
                             </x-slot>
 
                             <x-slot name="content">
-                                <x-dropdown-link :href="route('profile.edit')">
-                                    {{ __('Profile') }}
+                                <x-dropdown-link :href="route('profile.edit')" class="flex items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                    </svg>
+                                    {{ __('Profil') }}
                                 </x-dropdown-link>
                                 
-                                <x-dropdown-link :href="route('myPosts')">
-                                    {{ __('My Posts') }}
+                                <x-dropdown-link :href="route('myPosts')" class="flex items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+                                    </svg>
+                                    {{ __('Post Saya') }}
                                 </x-dropdown-link>
-
+                            
                                 <!-- Authentication -->
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
-
+                            
                                     <x-dropdown-link :href="route('logout')"
                                             onclick="event.preventDefault();
-                                                        this.closest('form').submit();">
-                                        {{ __('Log Out') }}
+                                                        this.closest('form').submit();"
+                                            class="flex items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                                        </svg>
+                                        {{ __('Keluar') }}
                                     </x-dropdown-link>
                                 </form>
                             </x-slot>
@@ -61,10 +74,17 @@
 
                 @guest
                     <a href="{{  route('register') }}"  class="hidden sm:flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-                        Create an Account
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+                        </svg>
+                          
+                        Buat Akun
                     </a>
                     <a href="{{  route('login') }}" class="hidden sm:flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-                       Login
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15M12 9l3 3m0 0-3 3m3-3H2.25" />
+                        </svg>
+                        Masuk   
                     </a>
                 @endguest
 
@@ -93,22 +113,32 @@
                 </div>
 
                 <div class="mt-3 space-y-1">
-                    <x-responsive-nav-link :href="route('profile.edit')">
-                        {{ __('Profile') }}
+                    <x-responsive-nav-link :href="route('profile.edit')" class="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                        </svg>
+                        {{ __('Profil') }}
                     </x-responsive-nav-link>
-
-                    <x-responsive-nav-link :href="route('myPosts')">
-                        {{ __('My Posts') }}
+                
+                    <x-responsive-nav-link :href="route('myPosts')" class="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+                        </svg>
+                        {{ __('Post Saya') }}
                     </x-responsive-nav-link>
-
+                
                     <!-- Authentication -->
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
-
+                
                         <x-responsive-nav-link :href="route('logout')"
                                 onclick="event.preventDefault();
-                                            this.closest('form').submit();">
-                            {{ __('Log Out') }}
+                                            this.closest('form').submit();"
+                                class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                            </svg>
+                            {{ __('Keluar') }}
                         </x-responsive-nav-link>
                     </form>
                 </div>

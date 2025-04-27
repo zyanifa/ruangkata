@@ -26,7 +26,7 @@
                         </x-follow-ctr>
 
                         <div class="flex gap-2 text-sm text-gray-500">
-                            {{ $post->readTime() }} min read
+                            {{ $post->readTime() }} menit baca
                             &middot;
                             {{ $post->created_at->format('d M Y') }}
                         </div>
@@ -39,13 +39,20 @@
                     @if ($post->user_id === Auth::id())
                         <div class="w-full py-4 mt-4 border-t border-b border-gray-200">
                             <x-primary-button href="{{ route('post.edit', $post->slug) }}">
-                                Edit Post
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="size-4 mr-2">
+                                    <path d="M13.488 2.513a1.75 1.75 0 0 0-2.475 0L6.75 6.774a2.75 2.75 0 0 0-.596.892l-.848 2.047a.75.75 0 0 0 .98.98l2.047-.848a2.75 2.75 0 0 0 .892-.596l4.261-4.262a1.75 1.75 0 0 0 0-2.474Z" />
+                                    <path d="M4.75 3.5c-.69 0-1.25.56-1.25 1.25v6.5c0 .69.56 1.25 1.25 1.25h6.5c.69 0 1.25-.56 1.25-1.25V9A.75.75 0 0 1 14 9v2.25A2.75 2.75 0 0 1 11.25 14h-6.5A2.75 2.75 0 0 1 2 11.25v-6.5A2.75 2.75 0 0 1 4.75 2H7a.75.75 0 0 1 0 1.5H4.75Z" />
+                                </svg>
+                                Ubah Post
                             </x-primary-button>
                             <form class="inline-block" action="{{ route('post.destroy', $post) }}" method="post">
                                 @csrf
                                 @method('delete')
                                 <x-danger-button>
-                                    Delete Post
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="size-4 mr-2">
+                                        <path fill-rule="evenodd" d="M5 3.25V4H2.75a.75.75 0 0 0 0 1.5h.3l.815 8.15A1.5 1.5 0 0 0 5.357 15h5.285a1.5 1.5 0 0 0 1.493-1.35l.815-8.15h.3a.75.75 0 0 0 0-1.5H11v-.75A2.25 2.25 0 0 0 8.75 1h-1.5A2.25 2.25 0 0 0 5 3.25Zm2.25-.75a.75.75 0 0 0-.75.75V4h3v-.75a.75.75 0 0 0-.75-.75h-1.5ZM6.05 6a.75.75 0 0 1 .787.713l.275 5.5a.75.75 0 0 1-1.498.075l-.275-5.5A.75.75 0 0 1 6.05 6Zm3.9 0a.75.75 0 0 1 .712.787l-.275 5.5a.75.75 0 0 1-1.498-.075l.275-5.5a.75.75 0 0 1 .786-.711Z" clip-rule="evenodd" />
+                                    </svg> 
+                                    Hapus Post
                                 </x-danger-button>
                             </form>
                         </div>
@@ -60,7 +67,7 @@
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M3 3v1.5M3 21v-6m0 0 2.77-.693a9 9 0 0 1 6.208.682l.108.054a9 9 0 0 0 6.086.71l3.114-.732a48.524 48.524 0 0 1-.005-10.499l-3.11.732a9 9 0 0 1-6.085-.711l-.108-.054a9 9 0 0 0-6.208-.682L3 4.5M3 15V4.5" />
                                     </svg>
-                                    Laporkan Postingan
+                                    Laporkan Post
                                 </button>
                             </div>
                         @endif
@@ -90,13 +97,13 @@
                 
                 <!-- Comments Section -->
                 <div id="comments-section" class="mt-12 border-t pt-8">
-                    <h3 class="text-xl font-bold mb-6">Comments ({{ $post->allComments->count() }})</h3>
+                    <h3 class="text-xl font-bold mb-6">Komentar ({{ $post->allComments->count() }})</h3>
                     
                     @auth
                         <x-comment-form :post="$post" />
                     @else
                         <div class="bg-gray-100 p-4 rounded-lg text-center">
-                            <p><a href="{{ route('login') }}" class="text-indigo-600 hover:underline">Login</a> or <a href="{{ route('register') }}" class="text-indigo-600 hover:underline">Register</a> to leave a comment</p>
+                            <p><a href="{{ route('login') }}" class="text-indigo-600 hover:underline">Masuk</a> atau <a href="{{ route('register') }}" class="text-indigo-600 hover:underline">daftar</a> untuk menulis komentar</p>
                         </div>
                     @endauth
                     
@@ -106,7 +113,7 @@
                                 <x-comment-item :comment="$comment" :post="$post" />
                             </div>
                         @empty
-                            <p class="text-gray-500 text-center py-4">No comments yet. Be the first to comment!</p>
+                            <p class="text-gray-500 text-center py-4">Belum ada komentar.</p>
                         @endforelse
                     </div>
                     
@@ -226,7 +233,7 @@
     });
 
     function deleteComment(commentId) {
-        if (confirm('Are you sure you want to delete this comment?')) {
+        if (confirm('Apakah Anda yakin ingin menghapus komentar ini?')) {
             document.getElementById(`delete-form-${commentId}`).submit();
         }
     }

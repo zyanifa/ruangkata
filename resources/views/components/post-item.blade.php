@@ -13,11 +13,11 @@
         </div>
         <div class="text-sm text-gray-400 flex gap-4">
             <div class="">
-                by 
+                oleh 
                 <a href="{{ route('profile.show', $post->user->username) }}" class="text-gray-600 hover:underline">
                     {{ $post->user->username }} 
                 </a>
-                at 
+                pada 
                 {{ $post->created_at->format('d M Y') }}
             </div>
             <span class="inline-flex gap-1 items-center">

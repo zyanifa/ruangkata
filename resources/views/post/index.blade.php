@@ -12,7 +12,7 @@
                 @forelse ($posts as $p)
                     <x-post-item :post="$p"></x-post-item>
                 @empty
-                    <div class="text-center text-gray-400 py-16">No Posts Found</div>
+                    <div class="text-center text-gray-400 py-16">Tidak ada post</div>
                 @endforelse
             </div>
 

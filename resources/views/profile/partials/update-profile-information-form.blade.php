@@ -1,11 +1,11 @@
 <section>
     <header>
         <h2 class="text-lg font-medium text-gray-900">
-            {{ __('Profile Information') }}
+            {{ __('Informasi Profil') }}
         </h2>
 
         <p class="mt-1 text-sm text-gray-600">
-            {{ __("Update your account's profile information and email address.") }}
+            {{ __("Ubah informasi profil dan email Anda.") }}
         </p>
     </header>
 
@@ -26,14 +26,14 @@
 
         <!-- Image -->
         <div>
-            <x-input-label for="image" :value="__('Avatar')" />
+            <x-input-label for="image" :value="__('Foto')" />
             <x-text-input id="image" class="block mt-1 w-full" type="file" name="image"
                 :value="old('image')" autofocus />
             <x-input-error :messages="$errors->get('image')" class="mt-2" />
         </div>
 
         <div>
-            <x-input-label for="name" :value="__('Name')" />
+            <x-input-label for="name" :value="__('Nama')" />
             <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
         </div>
@@ -52,16 +52,16 @@
             @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
                 <div>
                     <p class="text-sm mt-2 text-gray-800">
-                        {{ __('Your email address is unverified.') }}
+                        {{ __('Email Anda belum diverifikasi.') }}
 
                         <button form="send-verification" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                            {{ __('Click here to re-send the verification email.') }}
+                            {{ __('Kirim ulang verifikasi email.') }}
                         </button>
                     </p>
 
                     @if (session('status') === 'verification-link-sent')
                         <p class="mt-2 font-medium text-sm text-green-600">
-                            {{ __('A new verification link has been sent to your email address.') }}
+                            {{ __('Tautan verifikasi baru telah dikirim ke alamat email Anda.') }}
                         </p>
                     @endif
                 </div>
@@ -70,13 +70,13 @@
 
         <!-- Bio -->
         <div class="mt-4">
-            <x-input-label for="bio" :value="__('Bio')" />
+            <x-input-label for="bio" :value="__('Bio Data')" />
             <x-input-textarea id="bio" class="block mt-1 w-full" name="bio">{{ old('bio', $user->bio) }}</x-input-textarea>
             <x-input-error :messages="$errors->get('bio')" class="mt-2" />
         </div>
 
         <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('Save') }}</x-primary-button>
+            <x-primary-button>{{ __('Simpan') }}</x-primary-button>
 
             @if (session('status') === 'profile-updated')
                 <p
@@ -85,7 +85,7 @@
                     x-transition
                     x-init="setTimeout(() => show = false, 2000)"
                     class="text-sm text-gray-600"
-                >{{ __('Saved.') }}</p>
+                >{{ __('Tersimpan.') }}</p>
             @endif
         </div>
     </form>
