@@ -151,6 +151,7 @@ class PostController extends Controller
 
         if ($user) {
             $ids = $user->following()->pluck('users.id');
+            $ids[] = $user->id;
             $query->whereIn('user_id', $ids);
         }
         $posts = $query->simplePaginate(5);
@@ -171,6 +172,27 @@ class PostController extends Controller
 
         return view('post.index', [
             'posts' => $posts,
+        ]);
+    }
+
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+        
+        $posts = Post::with(['user', 'media'])
+            ->where('published_at', '<=', now())
+            ->where(function($q) use ($query) {
+                $q->whereRaw('LOWER(title) LIKE ?', ['%' . strtolower($query) . '%'])
+                  ->orWhereRaw('LOWER(short_description) LIKE ?', ['%' . strtolower($query) . '%']);
+            })
+            ->withCount('claps')
+            ->latest()
+            ->simplePaginate(5)
+            ->appends(['query' => $query]);
+        
+        return view('post.index', [
+            'posts' => $posts,
+            'searchQuery' => $query
         ]);
     }
 }
