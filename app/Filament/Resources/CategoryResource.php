@@ -61,7 +61,8 @@ class CategoryResource extends Resource
                     Tables\Actions\Action::make('posts')
                         ->label('View Posts')
                         ->url(fn (Category $record): string => 
-                            static::getUrl('posts', ['record' => $record])),
+                            static::getUrl('posts', ['record' => $record]))
+                        ->icon('heroicon-o-eye'),
                     Tables\Actions\EditAction::make(),
                     Tables\Actions\DeleteAction::make(),
                 ]),

@@ -63,7 +63,7 @@ class PostReportResource extends Resource
                     ->sortable()
                     ->alignCenter(),
                 Tables\Columns\TextColumn::make('published_at')
-                    ->dateTime()
+                    ->dateTime('d M Y, H:i')
                     ->sortable(),
             ])
             ->defaultSort('reports_count', 'desc')

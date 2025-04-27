@@ -12,7 +12,7 @@
                     <span class="font-medium">Author:</span> {{ $this->record->user->name }}
                 </div>
                 <div>
-                    <span class="font-medium">Date:</span> {{ $this->record->created_at->format('M d, Y H:i') }}
+                    <span class="font-medium">Date:</span> {{ $this->record->created_at->format('d M Y, H:i') }}
                 </div>
                 <div>
                     <span class="font-medium">Post:</span> {{ $this->record->post->title }}

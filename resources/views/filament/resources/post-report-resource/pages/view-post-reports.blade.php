@@ -14,7 +14,7 @@
                 <div>
                     <span class="font-medium">Published:</span> 
                     @if($this->record->published_at)
-                    {{ \Carbon\Carbon::parse($this->record->published_at)->format('M d, Y H:i') }}
+                    {{ \Carbon\Carbon::parse($this->record->published_at)->format('d M Y, H:i') }}
                     @else
                         Draft
                     @endif
