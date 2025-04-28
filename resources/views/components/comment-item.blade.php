@@ -12,7 +12,7 @@
                 <span class="text-sm text-gray-500">
                     {{ $comment->created_at->locale('id')->diffForHumans() }}
                     @if($comment->isEdited())
-                        <span class="text-xs text-gray-400 ml-1">(edited)</span>
+                        <span class="text-xs text-gray-400 ml-1">(diubah)</span>
                     @endif
                 </span>
             </div>
