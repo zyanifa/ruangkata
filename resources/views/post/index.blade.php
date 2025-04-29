@@ -1,6 +1,6 @@
 <x-app-layout>
-    <div class="py-4">
-        <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">
+    <x-two-column-layout>
+        <x-slot name="main">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-4 text-gray-900">
                     <x-category-tabs>
@@ -17,6 +17,10 @@
             </div>
 
             {{ $posts->links() }}
-        </div>
-    </div>
+        </x-slot>
+        
+        <x-slot name="sidebar">
+            <x-rules-container />
+        </x-slot>
+    </x-two-column-layout>
 </x-app-layout>

@@ -1,6 +1,6 @@
 <x-app-layout>
-    <div class="py-4">
-        <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">
+    <x-two-column-layout>
+        <x-slot name="main">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-8">
                 <h1 class="text-2xl mb-4">{{ $post->title }}</h1>
 
@@ -123,10 +123,13 @@
                     </div>
                 </div>
                 <!-- End Comments Section -->
-
             </div>
-        </div>
-    </div>
+        </x-slot>
+        
+        <x-slot name="sidebar">
+            <x-rules-container />
+        </x-slot>
+    </x-two-column-layout>
 </x-app-layout>
 
 <script>
@@ -206,7 +209,6 @@
         // Handle pagination links
         document.querySelectorAll('.pagination a').forEach(link => {
             link.addEventListener('click', function(e) {
-                // Store the current scroll position in localStorage
                 localStorage.setItem('commentScrollPosition', window.scrollY);
             });
         });

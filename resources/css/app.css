@@ -174,3 +174,13 @@
     display: table;
     clear: both;
 }
+
+/* Smooth transition for sticky sidebar */
+.sticky {
+    transition: top 0.2s ease;
+}
+
+/* Rules container collapsible animation */
+[x-cloak] { 
+    display: none !important; 
+}
