@@ -13,6 +13,10 @@ class ActivityChartWidget extends ChartWidget
     protected static ?string $heading = 'Aktivitas Pengguna';
     protected static ?int $sort = 1;
     protected static ?string $maxHeight = '300px';
+    public function getColumnSpan(): int|string
+    {
+        return 'full';
+    }
     
     protected function getData(): array
     {
