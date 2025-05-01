@@ -18,6 +18,11 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
+use App\Filament\Widgets\StatsOverviewWidget;
+use App\Filament\Widgets\ActivityChartWidget;
+use App\Filament\Widgets\LatestUsersWidget;
+use App\Filament\Widgets\RecentPostsWidget;
+
 class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
@@ -28,7 +33,14 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->login()
             ->colors([
-                'primary' => Color::Amber,
+                'primary' => Color::Blue,
+            ])
+            ->favicon(asset('favicon.ico'))
+            ->navigationItems([
+                \Filament\Navigation\NavigationItem::make('Lihat Website')
+                    ->url('/', shouldOpenInNewTab: true)
+                    ->icon('heroicon-o-globe-alt')
+                    ->sort(500),
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
@@ -38,7 +50,10 @@ class AdminPanelProvider extends PanelProvider
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
                 Widgets\AccountWidget::class,
-                Widgets\FilamentInfoWidget::class,
+                StatsOverviewWidget::class,
+                ActivityChartWidget::class,
+                RecentPostsWidget::class,
+                LatestUsersWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,
