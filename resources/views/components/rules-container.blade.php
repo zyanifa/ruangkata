@@ -23,22 +23,6 @@
             </div>
         </li>
         
-        <li x-data="{ id: 2 }" class="rounded-lg overflow-hidden">
-            <button 
-                @click="expandedRule = expandedRule === 2 ? null : 2" 
-                class="flex items-start w-full text-left p-2 hover:bg-gray-50 rounded-lg"
-                :class="{ 'bg-blue-50': expandedRule === 2 }"
-            >
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1 text-blue-600 flex-shrink-0 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
-                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                </svg>
-                <span>Laporkan post atau komentar yang melanggar aturan</span>
-            </button>
-            <div x-show="expandedRule === 2" x-collapse class="pl-8 pr-2 pb-2 text-gray-600 text-xs">
-                Jika Anda menemukan konten yang melanggar aturan komunitas, segera laporkan agar moderator dapat meninjau.
-            </div>
-        </li>
-        
         <li x-data="{ id: 3 }" class="rounded-lg overflow-hidden">
             <button 
                 @click="expandedRule = expandedRule === 3 ? null : 3" 
@@ -84,6 +68,22 @@
             </button>
             <div x-show="expandedRule === 5" x-collapse class="pl-8 pr-2 pb-2 text-gray-600 text-xs">
                 Pastikan informasi yang dibagikan akurat dan dapat diverifikasi. Jangan menyebarkan berita palsu atau hoax.
+            </div>
+        </li>
+
+        <li x-data="{ id: 2 }" class="rounded-lg overflow-hidden">
+            <button 
+                @click="expandedRule = expandedRule === 2 ? null : 2" 
+                class="flex items-start w-full text-left p-2 hover:bg-gray-50 rounded-lg"
+                :class="{ 'bg-blue-50': expandedRule === 2 }"
+            >
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1 text-blue-600 flex-shrink-0 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                </svg>
+                <span>Laporkan post atau komentar yang melanggar aturan</span>
+            </button>
+            <div x-show="expandedRule === 2" x-collapse class="pl-8 pr-2 pb-2 text-gray-600 text-xs">
+                Jika Anda menemukan konten yang melanggar aturan komunitas, segera laporkan agar moderator dapat meninjau.
             </div>
         </li>
     </ul>
