@@ -89,6 +89,12 @@
                     </div>
                 </div>
 
+                @if($post->updated_at->gt($post->created_at))
+                <div class="mt-6 text-sm text-gray-500 italic">
+                    Terakhir diubah pada {{ $post->updated_at->format('d M Y, H:i') }}
+                </div>
+                @endif
+
                 <div class="mt-8">
                     <span class="px-4 py-2 bg-gray-200 rounded-2xl">
                         {{ $post->category->name }}
