@@ -69,9 +69,14 @@
                         <x-input-error :messages="$errors->get('published_at')" class="mt-2" />
                     </div>
 
-                    <x-primary-button class="mt-4">
-                        Buat
-                    </x-primary-button>
+                    <div class="flex items-center mt-4">
+                        <x-primary-button>
+                            Buat
+                        </x-primary-button>
+                        <a href="{{ route('dashboard') }}" class="text-sm text-gray-600 hover:text-gray-900 ml-4">
+                            {{ __('Batal') }}
+                        </a>
+                    </div>
                 </form>
             </div>
         </div>

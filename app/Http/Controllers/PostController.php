@@ -54,12 +54,7 @@ class PostController extends Controller
     {
         $data = $request->validated();
 
-        // $image = $data['image'];
-        // unset($data['image']);
         $data['user_id'] = Auth::id();
-
-        // $imagePath = $image->store('posts', 'public');
-        // $data['image'] = $imagePath;
 
         // Sanitize the content to remove harmful HTML tags
         // $data['content'] = strip_tags($data['content'], '<p><a><b><i><strong><em><ul><ol><li><br><h1><h2><h3><h4><h5><h6><pre><code><img>');
@@ -69,7 +64,7 @@ class PostController extends Controller
         $post->addMediaFromRequest('image')
             ->toMediaCollection();
 
-        return redirect()->route('dashboard');
+        return redirect()->route('post.show', ['username' => $post->user->username, 'post' => $post->slug]);
     }
 
     /**
