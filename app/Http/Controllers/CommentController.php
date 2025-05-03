@@ -49,7 +49,6 @@ class CommentController extends Controller
         ]);
 
         $comment->content = $validated['content'];
-        $comment->edited_at = now();
         $comment->save();
 
         return redirect(url()->previous() . '#comment-' . $comment->id)->with('success', 'Comment updated successfully!');

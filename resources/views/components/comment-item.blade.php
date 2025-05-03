@@ -11,7 +11,7 @@
                 </h4>
                 <span class="text-sm text-gray-500">
                     {{ $comment->created_at->locale('id')->diffForHumans() }}
-                    @if($comment->isEdited())
+                    @if($comment->updated_at->gt($comment->created_at))
                         <span class="text-xs text-gray-400 ml-1">(diubah)</span>
                     @endif
                 </span>
@@ -135,7 +135,7 @@
                                         </h4>
                                         <span class="text-sm text-gray-500">
                                             {{ $reply->created_at->locale('id')->diffForHumans() }}
-                                            @if($reply->isEdited())
+                                            @if($reply->updated_at->gt($reply->created_at))
                                                 <span class="text-xs text-gray-400 ml-1">(diubah)</span>
                                             @endif
                                         </span>
