@@ -205,6 +205,7 @@
                                         </div>
                                         @endif
 
+                                        @auth
                                         @if($reply->user_id !== auth()->id())
                                         <div class="ml-auto group relative">
                                             <button
@@ -218,6 +219,7 @@
                                             </button>
                                         </div>
                                         @endif
+                                        @endauth
                                     </div>
                                 </div>
                             </div>

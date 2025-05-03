@@ -18,7 +18,6 @@ class Post extends Model implements HasMedia
     use HasSlug;
 
     protected $fillable = [
-        // 'image',
         'title',
         'slug',
         'short_description',
