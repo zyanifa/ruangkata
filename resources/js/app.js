@@ -70,7 +70,6 @@ const {
 	TableColumnResize,
 	TableProperties,
 	TableToolbar,
-	TodoList,
 	Underline
 } = window.CKEDITOR;
 
@@ -113,7 +112,6 @@ const editorConfig = {
 			'|',
 			'bulletedList',
 			'numberedList',
-			'todoList',
 			'outdent',
 			'indent'
 		],
@@ -175,7 +173,6 @@ const editorConfig = {
 		TableColumnResize,
 		TableProperties,
 		TableToolbar,
-		TodoList,
 		Underline
 	],
 
@@ -276,7 +273,7 @@ const editorConfig = {
 			reversed: true
 		}
 	},
-	placeholder: 'Type or paste your content here!',
+	placeholder: 'Ketik konten Anda di sini!',
 	table: {
 		contentToolbar: ['tableColumn', 'tableRow', 'mergeTableCells', 'tableProperties', 'tableCellProperties']
 	},
@@ -293,14 +290,26 @@ const editorConfig = {
 
 };
 
-ClassicEditor.create(document.querySelector('#editor'), editorConfig)
-    .then(editor => {
-        // Update the form before submission
-        document.querySelector('form').addEventListener('submit', function(e) {
-            // Update the textarea with the editor content
-            editor.updateSourceElement();
-        });
-    })
-    .catch(error => {
-        console.error(error);
+// Update your ClassicEditor.create call with this:
+
+ClassicEditor.create(document.querySelector('#editor'), {
+    ...editorConfig,
+    // Add these properties:
+    ui: {
+        viewportOffset: { top: 10, right: 10, bottom: 10, left: 10 }
+    }
+})
+.then(editor => {
+    // Apply content styles to the editing area
+    const editorElement = editor.ui.view.editable.element;
+    editorElement.classList.add('ck-content');
+    
+    // Update the form before submission
+    document.querySelector('form').addEventListener('submit', function(e) {
+        // Update the textarea with the editor content
+        editor.updateSourceElement();
     });
+})
+.catch(error => {
+    console.error(error);
+});
