@@ -13,7 +13,7 @@ class PublicProfileController extends Controller
             ->where('published_at', '<=', now())
             ->withCount('claps')
             ->latest()
-            ->paginate();
+            ->paginate(5);
 
         return view('profile.show', [
             'user' => $user,
