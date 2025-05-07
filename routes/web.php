@@ -48,15 +48,6 @@ Route::middleware(['auth', 'verified'])->group(function() {
 
     Route::delete('/post/{post}', [PostController::class, 'destroy'])
         ->name('post.destroy');
-        
-    Route::get('/my-posts', [PostController::class, 'myPosts'])
-        ->name('myPosts');
-
-    Route::post('/follow/{user}', [FollowerController::class, 'followUnfollow'])
-        ->name('follow');
-
-    Route::post('/clap/{post}', [ClapController::class, 'clap'])
-        ->name('clap');
 });
 
 Route::middleware('auth')->group(function () {
@@ -74,6 +65,15 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/upload-image', [ImageUploadController::class, 'upload'])
         ->name('image.upload');
+
+        Route::get('/my-posts', [PostController::class, 'myPosts'])
+        ->name('myPosts');
+
+    Route::post('/follow/{user}', [FollowerController::class, 'followUnfollow'])
+        ->name('follow');
+
+    Route::post('/clap/{post}', [ClapController::class, 'clap'])
+        ->name('clap');
 });
 
 require __DIR__ . '/auth.php';

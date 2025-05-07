@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\ReportReason;
 use App\Models\Comment;
 use App\Models\Post;
 use App\Models\Report;
@@ -22,7 +23,7 @@ class ReportController extends Controller
         return view('reports.form', [
             'model' => $model,
             'type' => $type,
-            'reasons' => Report::getReasons(),
+            'reasons' => ReportReason::getReasons(),
         ]);
     }
     

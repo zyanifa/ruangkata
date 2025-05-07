@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\ReportReason;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,25 +17,13 @@ class Report extends Model
         'reviewed',
     ];
 
-    // Define report reasons as enum-like constants
-    public const REASON_IRRELEVANT = 'konten_tidak_relevan';
-    public const REASON_HATE_SPEECH = 'ujaran_kebencian';
-    public const REASON_SPAM = 'spam';
-    public const REASON_MISLEADING = 'informasi_menyesatkan';
-    public const REASON_INAPPROPRIATE = 'konten_tidak_pantas';
-    public const REASON_OTHER = 'lainnya';
+    protected $casts = [
+        'reason' => ReportReason::class,
+    ];
 
-    // Get all available reasons
     public static function getReasons(): array
     {
-        return [
-            self::REASON_IRRELEVANT => 'Konten tidak ada hubungannya dengan teknologi',
-            self::REASON_HATE_SPEECH => 'Konten mengandung tulisan negatif/ujaran kebencian',
-            self::REASON_SPAM => 'Spam atau konten promosi berlebihan',
-            self::REASON_MISLEADING => 'Informasi menyesatkan',
-            self::REASON_INAPPROPRIATE => 'Konten tidak pantas',
-            self::REASON_OTHER => 'Alasan lainnya',
-        ];
+        return ReportReason::getReasons();
     }
 
     public function reportable()
