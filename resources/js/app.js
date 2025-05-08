@@ -4,6 +4,7 @@ import Alpine from 'alpinejs';
 import collapse from '@alpinejs/collapse';
 
 import initializeComments from './comments';
+import './category-tabs.js';
 
 Alpine.plugin(collapse);
 window.Alpine = Alpine;

@@ -66,9 +66,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/upload-image', [ImageUploadController::class, 'upload'])
         ->name('image.upload');
 
-        Route::get('/my-posts', [PostController::class, 'myPosts'])
-        ->name('myPosts');
-
     Route::post('/follow/{user}', [FollowerController::class, 'followUnfollow'])
         ->name('follow');
 

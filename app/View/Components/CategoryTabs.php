@@ -22,7 +22,8 @@ class CategoryTabs extends Component
      */
     public function render(): View|Closure|string
     {
-        $categories = Category::get();
+        $categories = Category::orderBy('name')->get();
+        
         return view('components.category-tabs', [
             'categories' => $categories,
         ]);

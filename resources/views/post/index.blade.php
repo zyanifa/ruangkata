@@ -1,3 +1,4 @@
+<!-- filepath: d:\ruangkata\resources\views\post\index.blade.php -->
 <x-app-layout>
     <x-two-column-layout>
         <x-slot name="main">
@@ -8,15 +9,9 @@
                     </x-category-tabs>
                 </div>
             </div>
-            <div class="mt-8 text-gray-900">
-                @forelse ($posts as $p)
-                    <x-post-item :post="$p"></x-post-item>
-                @empty
-                    <div class="text-center text-gray-400 py-16">Tidak ada post</div>
-                @endforelse
+            <div id="posts-container" class="mt-8 text-gray-900">
+                @include('post.partials.post-list', ['posts' => $posts])
             </div>
-
-            {{ $posts->links() }}
         </x-slot>
         
         <x-slot name="sidebar">

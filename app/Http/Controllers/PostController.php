@@ -15,11 +15,11 @@ class PostController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $user = auth()->user();
-
-        $query =  Post::with(['user', 'media'])
+    
+        $query = Post::with(['user', 'media'])
             ->where('published_at', '<=', now())
             ->withCount('claps')
             ->latest();
@@ -28,10 +28,17 @@ class PostController extends Controller
             $ids[] = $user->id;
             $query->whereIn('user_id', $ids);
         }
-
+    
         $posts = $query->simplePaginate(5);
+        $categories = Category::orderBy('name')->get(); // Sort categories alphabetically
+        
+        if ($request->ajax() || $request->has('ajax')) {
+            return view('post.partials.post-list', ['posts' => $posts])->render();
+        }
+        
         return view('post.index', [
             'posts' => $posts,
+            'categories' => $categories, // Pass sorted categories
         ]);
     }
 
@@ -40,7 +47,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        $categories = Category::get();
+        $categories = Category::orderBy('name')->get(); // Sort categories alphabetically
         
         return view('post.create', [
             'categories' => $categories,
@@ -77,9 +84,12 @@ class PostController extends Controller
              ->latest()
              ->paginate(5);
          
+         $categories = Category::orderBy('name')->get(); // Sort categories alphabetically
+         
          return view('post.show', [
              'post' => $post,
              'comments' => $comments,
+             'categories' => $categories, // Pass sorted categories
          ]);
      }
 
@@ -91,7 +101,8 @@ class PostController extends Controller
         if ($post->user_id !== Auth::id()) {
             abort(403);
         }
-        $categories = Category::get();
+        $categories = Category::orderBy('name')->get(); // Sort categories alphabetically
+        
         return view('post.edit', [
             'post' => $post,
             'categories' => $categories,
@@ -134,39 +145,31 @@ class PostController extends Controller
         return redirect()->route('dashboard');
     }
 
-    public function category(Category $category)
+    public function category(Request $request, Category $category)
     {
         $user = auth()->user();
-
+    
         $query = $category->posts()
             ->where('published_at', '<=', now())
             ->with(['user', 'media'])
             ->withCount('claps')
             ->latest();
-
+    
         if ($user) {
             $ids = $user->following()->pluck('users.id');
             $ids[] = $user->id;
             $query->whereIn('user_id', $ids);
         }
         $posts = $query->simplePaginate(5);
-
+        $categories = Category::orderBy('name')->get(); // Sort categories alphabetically
+    
+        if ($request->ajax() || $request->has('ajax')) {
+            return view('post.partials.post-list', ['posts' => $posts])->render();
+        }
+        
         return view('post.index', [
             'posts' => $posts,
-        ]);
-    }
-
-    public function myPosts()
-    {
-        $user = auth()->user();
-        $posts = $user->posts()
-            ->with(['user', 'media'])
-            ->withCount('claps')
-            ->latest()
-            ->simplePaginate(5);
-
-        return view('post.index', [
-            'posts' => $posts,
+            'categories' => $categories, // Pass sorted categories
         ]);
     }
 
@@ -185,9 +188,16 @@ class PostController extends Controller
             ->simplePaginate(5)
             ->appends(['query' => $query]);
         
+        $categories = Category::orderBy('name')->get(); // Sort categories alphabetically
+        
+        if ($request->ajax() || $request->has('ajax')) {
+            return view('post.partials.post-list', ['posts' => $posts])->render();
+        }
+        
         return view('post.index', [
             'posts' => $posts,
-            'searchQuery' => $query
+            'searchQuery' => $query,
+            'categories' => $categories, // Pass sorted categories
         ]);
     }
 }
