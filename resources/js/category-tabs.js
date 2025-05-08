@@ -3,12 +3,56 @@ document.addEventListener('DOMContentLoaded', function() {
     const postsContainer = document.querySelector('#posts-container');
     const categoryLinks = document.querySelectorAll('.category-link');
     
+    const scrollRightButton = document.querySelector('.scroll-right');
+    const scrollLeftButton = document.querySelector('.scroll-left');
+    const rightGradient = scrollRightButton.parentElement;
+    const leftGradient = scrollLeftButton.parentElement;
+    
+    // Function to check scroll position and update button visibility
+    function updateScrollButtonsVisibility() {
+        // Check if we're at the left edge
+        if (tabsContainer.scrollLeft <= 0) {
+            scrollLeftButton.classList.add('scroll-button-hidden');
+            scrollLeftButton.classList.remove('scroll-button-visible');
+            leftGradient.classList.add('scroll-gradient-hidden');
+            leftGradient.classList.remove('scroll-gradient-visible');
+        } else {
+            scrollLeftButton.classList.add('scroll-button-visible');
+            scrollLeftButton.classList.remove('scroll-button-hidden');
+            leftGradient.classList.add('scroll-gradient-visible');
+            leftGradient.classList.remove('scroll-gradient-hidden');
+        }
+        
+        // Check if we're at the right edge
+        const scrollRight = tabsContainer.scrollWidth - tabsContainer.clientWidth;
+        if (Math.abs(tabsContainer.scrollLeft - scrollRight) < 2) {
+            scrollRightButton.classList.add('scroll-button-hidden');
+            scrollRightButton.classList.remove('scroll-button-visible');
+            rightGradient.classList.add('scroll-gradient-hidden');
+            rightGradient.classList.remove('scroll-gradient-visible');
+        } else {
+            scrollRightButton.classList.add('scroll-button-visible');
+            scrollRightButton.classList.remove('scroll-button-hidden');
+            rightGradient.classList.add('scroll-gradient-visible');
+            rightGradient.classList.remove('scroll-gradient-hidden');
+        }
+    }
+    
+    // Initialize button visibility
+    updateScrollButtonsVisibility();
+    
+    // Update visibility when scrolling
+    tabsContainer.addEventListener('scroll', updateScrollButtonsVisibility);
+    
+    // Also update on window resize
+    window.addEventListener('resize', updateScrollButtonsVisibility);
+    
     // Scroll buttons functionality
-    document.querySelector('.scroll-right').addEventListener('click', function() {
+    scrollRightButton.addEventListener('click', function() {
         tabsContainer.scrollBy({ left: 200, behavior: 'smooth' });
     });
     
-    document.querySelector('.scroll-left').addEventListener('click', function() {
+    scrollLeftButton.addEventListener('click', function() {
         tabsContainer.scrollBy({ left: -200, behavior: 'smooth' });
     });
     
@@ -31,8 +75,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Show loading state
             if (postsContainer) {
-                postsContainer.innerHTML = '<div class="text-center py-16"><svg class="inline w-8 h-8 text-gray-400 animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg></div>';
-            }
+                postsContainer.innerHTML = '<div class="flex justify-center items-center py-16"><svg class="w-6 h-6 custom-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="#e5e7eb" stroke-width="4"></circle><path fill="#3b82f6" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg></div>';            }
             
             // Update URL without page reload
             window.history.pushState({category: category}, '', url);
@@ -51,7 +94,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 .catch(error => {
                     console.error('Error:', error);
                     if (postsContainer) {
-                        postsContainer.innerHTML = '<div class="text-center text-red-500 py-16">Error loading posts</div>';
+                        postsContainer.innerHTML = '<div class="text-center text-red-500 py-16">Error memuat post</div>';
                     }
                 });
         });
@@ -67,8 +110,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 // Show loading state
                 if (postsContainer) {
-                    postsContainer.innerHTML = '<div class="text-center py-16"><svg class="inline w-8 h-8 text-gray-400 animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg></div>';
-                }
+                    postsContainer.innerHTML = '<div class="flex justify-center items-center py-16"><svg class="w-6 h-6 custom-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="#e5e7eb" stroke-width="4"></circle><path fill="#3b82f6" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg></div>';                }
                 
                 // Update URL without page reload
                 window.history.pushState({}, '', url);
@@ -85,7 +127,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     .catch(error => {
                         console.error('Error:', error);
                         if (postsContainer) {
-                            postsContainer.innerHTML = '<div class="text-center text-red-500 py-16">Error loading posts</div>';
+                            postsContainer.innerHTML = '<div class="text-center text-red-500 py-16">Error memuat post</div>';
                         }
                     });
             });

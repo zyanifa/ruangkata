@@ -235,3 +235,38 @@
 [x-cloak] { 
     display: none !important; 
 }
+
+/* Scroll button visibility utilities */
+.scroll-button-hidden {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+  
+  .scroll-button-visible {
+    opacity: 1;
+    transition: opacity 0.3s ease;
+  }
+  
+  .scroll-gradient-hidden {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .scroll-gradient-visible {
+    opacity: 1;
+    transition: opacity 0.3s ease;
+  }
+
+  @keyframes spinner-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  .custom-spin {
+    animation: spinner-spin 1s linear infinite;
+  }
