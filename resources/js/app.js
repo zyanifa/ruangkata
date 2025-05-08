@@ -3,10 +3,20 @@ import './bootstrap';
 import Alpine from 'alpinejs';
 import collapse from '@alpinejs/collapse';
 
+import initializeComments from './comments';
+
 Alpine.plugin(collapse);
 window.Alpine = Alpine;
 
 Alpine.start();
+
+// Initialize comments functionality when the DOM is ready
+document.addEventListener('DOMContentLoaded', function() {
+    // Only run on pages that have comments
+    if (document.getElementById('comments-section')) {
+        initializeComments();
+    }
+});
 
 /**
  * This configuration was generated using the CKEditor 5 Builder. You can modify it anytime using this link:
