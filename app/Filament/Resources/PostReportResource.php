@@ -21,7 +21,7 @@ class PostReportResource extends Resource
     
     protected static ?string $navigationGroup = 'Moderasi Konten';
     
-    protected static ?string $navigationLabel = 'Laporan Postingan';
+    protected static ?string $navigationLabel = 'Laporan Post';
     
     protected static ?int $navigationSort = 1;
     
@@ -75,14 +75,14 @@ class PostReportResource extends Resource
             ->actions([
                 Tables\Actions\ActionGroup::make([
                     Tables\Actions\Action::make('view_post')
-                        ->label('Lihat Postingan')
+                        ->label('Lihat Post')
                         ->url(fn (Post $record) => url("@{$record->user->username}/{$record->slug}"))
                         ->openUrlInNewTab()
                         ->icon('heroicon-o-eye'),
                     Tables\Actions\DeleteAction::make()
-                        ->label('Hapus Postingan')
-                        ->modalHeading('Hapus Postingan')
-                        ->modalDescription('Apakah Anda yakin ingin menghapus postingan ini?'),
+                        ->label('Hapus Post')
+                        ->modalHeading('Hapus Post')
+                        ->modalDescription('Apakah Anda yakin ingin menghapus post ini?'),
                 ]),
             ])
             ->bulkActions([

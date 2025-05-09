@@ -45,7 +45,7 @@ class CategoryResource extends Resource
                     ->url(fn (Category $record): string => 
                         static::getUrl('posts', ['record' => $record])),
                 Tables\Columns\TextColumn::make('posts_count')
-                    ->label('Jumlah Postingan')
+                    ->label('Jumlah Post')
                     ->counts('posts')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
@@ -65,7 +65,7 @@ class CategoryResource extends Resource
             ->actions([
                 Tables\Actions\ActionGroup::make([
                     Tables\Actions\Action::make('posts')
-                        ->label('Lihat Postingan')
+                        ->label('Lihat Post')
                         ->url(fn (Category $record): string => 
                             static::getUrl('posts', ['record' => $record]))
                         ->icon('heroicon-o-eye'),

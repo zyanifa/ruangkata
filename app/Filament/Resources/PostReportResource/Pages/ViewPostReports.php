@@ -93,27 +93,27 @@ class ViewPostReports extends Page implements Tables\Contracts\HasTable
     
     public function getTitle(): string 
     {
-        return "Laporan postingan: {$this->record->title}";
+        return "Laporan post: {$this->record->title}";
     }
     
     protected function getHeaderActions(): array
     {
         return [
             Actions\Action::make('view_post')
-                ->label('Lihat Postingan')
+                ->label('Lihat Post')
                 ->url(url("@{$this->record->user->username}/{$this->record->slug}"))
                 ->openUrlInNewTab()
                 ->color('success')
                 ->icon('heroicon-o-eye'),
             Actions\Action::make('delete_post')
-                ->label('Hapus Postingan')
+                ->label('Hapus Post')
                 ->action(function () {
                     $this->record->delete();
                     return redirect()->to(PostReportResource::getUrl('index'));
                 })
                 ->requiresConfirmation()
-                ->modalHeading('Hapus Postingan')
-                ->modalDescription('Apakah Anda yakin ingin menghapus postingan ini?')
+                ->modalHeading('Hapus Post')
+                ->modalDescription('Apakah Anda yakin ingin menghapus post ini?')
                 ->color('danger')
                 ->icon('heroicon-o-trash'),
         ];

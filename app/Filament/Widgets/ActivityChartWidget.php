@@ -52,7 +52,7 @@ class ActivityChartWidget extends ChartWidget
                     'borderColor' => 'rgb(75, 192, 192)',
                 ],
                 [
-                    'label' => 'Postingan Baru',
+                    'label' => 'Post Baru',
                     'data' => $posts,
                     'backgroundColor' => 'rgba(54, 162, 235, 0.2)',
                     'borderColor' => 'rgb(54, 162, 235)',

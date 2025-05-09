@@ -77,7 +77,7 @@ class UserResource extends Resource
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('posts_count')
-                    ->label('Jumlah Postingan')
+                    ->label('Jumlah Post')
                     ->counts('posts')
                     ->sortable(),
                 Tables\Columns\IconColumn::make('is_admin')
@@ -108,7 +108,7 @@ class UserResource extends Resource
             ->actions([
                 Tables\Actions\ActionGroup::make([
                     Tables\Actions\ViewAction::make('posts')
-                        ->label('Lihat Postingan')
+                        ->label('Lihat Post')
                         ->url(fn (User $record): string => 
                             static::getUrl('posts', ['record' => $record])),
                     Tables\Actions\EditAction::make(),

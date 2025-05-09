@@ -21,7 +21,7 @@ class StatsOverviewWidget extends BaseWidget
                 ->chart([7, 2, 10, 3, 15, 4, 17])
                 ->color('success'),
                 
-            Stat::make('Jumlah Postingan', Post::count())
+            Stat::make('Jumlah Post', Post::count())
                 ->description('Semua konten yang dipublikasikan')
                 ->descriptionIcon('heroicon-m-document-text')
                 ->chart([2, 10, 3, 15, 4, 17, 18])

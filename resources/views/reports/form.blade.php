@@ -5,7 +5,7 @@
                 <h2 class="text-xl font-semibold mb-4">
                     Laporkan 
                     @if ($type === 'post')
-                        Postingan
+                        Post
                     @elseif ($type === 'comment')
                         Komentar
                     @endif

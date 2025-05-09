@@ -60,7 +60,7 @@ class CommentReportResource extends Resource
                     ->label('Pembuat')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('post.title')
-                    ->label('Judul Postingan')
+                    ->label('Judul Post')
                     ->limit(30)
                     ->sortable(),
                 Tables\Columns\TextColumn::make('reports_count')

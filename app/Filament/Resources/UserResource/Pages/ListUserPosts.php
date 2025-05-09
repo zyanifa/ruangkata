@@ -92,11 +92,11 @@ class ListUserPosts extends Page implements Tables\Contracts\HasTable
 
     public function getTitle(): string 
     {
-        return "Postingan oleh {$this->user->name}";
+        return "Post oleh {$this->user->name}";
     }
 
     public function getSubheading(): string
     {
-        return "@{$this->user->username} • {$this->user->posts->count()} postingan";
+        return "@{$this->user->username} • {$this->user->posts->count()} post";
     }
 }

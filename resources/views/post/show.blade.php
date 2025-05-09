@@ -41,7 +41,7 @@
                                     </svg>
                                     Ubah
                                 </button>
-                                <button onclick="if(confirm('Apakah Anda yakin ingin menghapus postingan ini?')){document.getElementById('delete-post-form').submit();}" class="text-sm text-red-600 hover:text-red-800 flex items-center">
+                                <button onclick="if(confirm('Apakah Anda yakin ingin menghapus post ini?')){document.getElementById('delete-post-form').submit();}" class="text-sm text-red-600 hover:text-red-800 flex items-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="size-3 mr-1">
                                         <path fill-rule="evenodd" d="M5 3.25V4H2.75a.75.75 0 0 0 0 1.5h.3l.815 8.15A1.5 1.5 0 0 0 5.357 15h5.285a1.5 1.5 0 0 0 1.493-1.35l.815-8.15h.3a.75.75 0 0 0 0-1.5H11v-.75A2.25 2.25 0 0 0 8.75 1h-1.5A2.25 2.25 0 0 0 5 3.25Zm2.25-.75a.75.75 0 0 0-.75.75V4h3v-.75a.75.75 0 0 0-.75-.75h-1.5ZM6.05 6a.75.75 0 0 1 .787.713l.275 5.5a.75.75 0 0 1-1.498.075l-.275-5.5A.75.75 0 0 1 6.05 6Zm3.9 0a.75.75 0 0 1 .712.787l-.275 5.5a.75.75 0 0 1-1.498-.075l.275-5.5a.75.75 0 0 1 .786-.711Z" clip-rule="evenodd" />
                                     </svg>
@@ -62,7 +62,7 @@
                         @if ($post->user_id !== Auth::id())
                             <div class="mt-2 ml-auto">
                                 <button
-                                    onclick="if(confirm('Apakah Anda yakin ingin melaporkan postingan ini?')) { window.location.href='{{ route('report.form', ['type' => 'post', 'id' => $post->id]) }}'; }"
+                                    onclick="if(confirm('Apakah Anda yakin ingin melaporkan post ini?')) { window.location.href='{{ route('report.form', ['type' => 'post', 'id' => $post->id]) }}'; }"
                                     class="text-sm text-red-600 hover:text-red-800 flex items-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M3 3v1.5M3 21v-6m0 0 2.77-.693a9 9 0 0 1 6.208.682l.108.054a9 9 0 0 0 6.086.71l3.114-.732a48.524 48.524 0 0 1-.005-10.499l-3.11.732a9 9 0 0 1-6.085-.711l-.108-.054a9 9 0 0 0-6.208-.682L3 4.5M3 15V4.5" />

@@ -75,6 +75,6 @@ class ListCategoryPosts extends Page implements Tables\Contracts\HasTable
 
     public function getTitle(): string 
     {
-        return "Postingan pada kategori {$this->category->name}";
+        return "Post pada kategori {$this->category->name}";
     }
 }

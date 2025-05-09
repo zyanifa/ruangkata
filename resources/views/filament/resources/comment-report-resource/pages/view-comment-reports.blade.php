@@ -15,7 +15,7 @@
                     <span class="font-medium">Dibuat Pada:</span> {{ $this->record->created_at->format('d M Y, H:i') }}
                 </div>
                 <div>
-                    <span class="font-medium">Judul Postingan:</span> {{ $this->record->post->title }}
+                    <span class="font-medium">Judul Post:</span> {{ $this->record->post->title }}
                 </div>
                 <div>
                     <span class="font-medium">Jumlah Laporan:</span> {{ $this->record->reports()->count() }}

@@ -15,7 +15,7 @@ class RecentPostsWidget extends BaseWidget
     public function table(Table $table): Table
     {
         return $table
-            ->heading('Postingan Terbaru')
+            ->heading('Post Terbaru')
             ->description('Konten terbaru yang dipublikasikan di platform')
             ->query(Post::with('user')->latest()->limit(5))
             ->columns([
