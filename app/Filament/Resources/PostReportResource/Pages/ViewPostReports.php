@@ -9,6 +9,7 @@ use Filament\Resources\Pages\Page;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use App\Enums\ReportReason;
 
 class ViewPostReports extends Page implements Tables\Contracts\HasTable
 {
@@ -38,7 +39,7 @@ class ViewPostReports extends Page implements Tables\Contracts\HasTable
                     ->sortable(),
                 TextColumn::make('reason')
                     ->label('Alasan')
-                    ->formatStateUsing(fn (string $state) => Report::getReasons()[$state] ?? $state)
+                    ->formatStateUsing(fn ($state) => $state instanceof ReportReason ? $state->label() : $state)
                     ->sortable(),
                 TextColumn::make('details')
                     ->label('Rincian')

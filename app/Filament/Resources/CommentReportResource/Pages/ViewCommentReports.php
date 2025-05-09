@@ -38,7 +38,7 @@ class ViewCommentReports extends Page implements Tables\Contracts\HasTable
                     ->sortable(),
                 TextColumn::make('reason')
                     ->label('Alasan')
-                    ->formatStateUsing(fn (string $state) => Report::getReasons()[$state] ?? $state)
+                    ->formatStateUsing(fn ($state) => $state instanceof ReportReason ? $state->label() : $state)
                     ->sortable(),
                 TextColumn::make('details')
                     ->label('Rincian')
