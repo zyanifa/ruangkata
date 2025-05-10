@@ -4,6 +4,7 @@ import Alpine from 'alpinejs';
 import collapse from '@alpinejs/collapse';
 
 import initializeComments from './comments';
+import initializeImagePreview from './post-image-preview';
 import './category-tabs.js';
 
 Alpine.plugin(collapse);
@@ -17,6 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (document.getElementById('comments-section')) {
         initializeComments();
     }
+	initializeImagePreview();
 });
 
 /**

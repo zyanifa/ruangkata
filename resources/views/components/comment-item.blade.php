@@ -162,12 +162,12 @@
                                                     type="button" 
                                                     class="px-2 py-1 mr-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:outline-none"
                                                     onclick="toggleEditForm('{{ $reply->id }}', false)">
-                                                    Cancel
+                                                    Batal
                                                 </button>
                                                 <button 
                                                     type="submit" 
                                                     class="px-2 py-1 text-sm font-medium text-white bg-indigo-500 rounded-lg hover:bg-indigo-600 focus:outline-none">
-                                                    Update
+                                                    Ubah
                                                 </button>
                                             </div>
                                         </form>

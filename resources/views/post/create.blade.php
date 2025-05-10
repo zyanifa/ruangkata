@@ -82,38 +82,3 @@
         </div>
     </div>
 </x-app-layout>
-<script>
-
-    // Preview image before upload
-    document.addEventListener('DOMContentLoaded', function() {
-    const imageInput = document.getElementById('image');
-    const previewContainer = document.getElementById('image-preview-container');
-    
-    imageInput.addEventListener('change', function() {
-        previewContainer.innerHTML = '';
-        
-        if (this.files && this.files[0]) {
-            // Add flex container for centering
-            previewContainer.className = 'mt-2 flex justify-center flex-col items-center';
-            
-            const reader = new FileReader();
-            
-            reader.onload = function(e) {
-                const preview = document.createElement('img');
-                preview.src = e.target.result;
-                preview.className = 'mt-2 rounded-md max-h-64 max-w-full';
-                preview.alt = 'Image Preview';
-                
-                const previewText = document.createElement('p');
-                previewText.className = 'text-sm text-gray-500 mt-1';
-                previewText.textContent = 'Preview foto thumbnail';
-                
-                previewContainer.appendChild(preview);
-                previewContainer.appendChild(previewText);
-            }
-            
-            reader.readAsDataURL(this.files[0]);
-        }
-    });
-});
-</script>
