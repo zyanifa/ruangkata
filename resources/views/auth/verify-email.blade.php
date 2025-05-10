@@ -1,4 +1,8 @@
 <x-guest-layout>
+    <h2 class="text-xl font-bold mb-4 text-gray-800 text-center">
+        {{ __('Verifikasi Email') }}
+    </h2>
+
     <div class="mb-4 text-sm text-gray-600">
         {{ __('Terima kasih telah mendaftar! Silahkan lakukan verifikasi email. Jika Anda tidak menerima email verifikasi, silahkan tekan tombol kirim ulang di bawah ini.') }}    </div>
 

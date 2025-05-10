@@ -1,4 +1,8 @@
 <x-guest-layout>
+    <h2 class="text-xl font-bold mb-4 text-gray-800 text-center">
+        {{ __('Reset Kata Sandi') }}
+    </h2>
+    
     <div class="mb-4 text-sm text-gray-600">
         {{ __('Lupa kata sandi? Tidak masalah. Silakan isi alamat email Anda, dan kami akan kirim tautan untuk reset kata sandi. Melalui tautan tersebut, Anda dapat membuat kata sandi baru.') }}
     </div>

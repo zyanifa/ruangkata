@@ -1,4 +1,8 @@
 <x-guest-layout>
+    <h2 class="text-xl font-bold mb-4 text-gray-800 text-center">
+        {{ __('Masuk ke Akun Anda') }}
+    </h2>
+    
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 

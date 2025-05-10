@@ -1,8 +1,8 @@
 <x-app-layout>
     <div class="py-4">
         <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">
-            <h1 class="text-3xl mb-4">Buat Post Baru</h1>
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-8">
+                <h1 class="text-3xl mb-4 text-center">Buat Post Baru</h1>
                 <form action="{{  route('post.store') }}" 
                 enctype="multipart/form-data" method="post">
 

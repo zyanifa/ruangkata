@@ -1,21 +1,24 @@
 <x-app-layout>
     <div class="py-4">
         <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">
-            <h1 class="text-3xl mb-4">
-                Ubah Post: <strong class="font-bold">{{ $post->title }}</strong>
-            </h1>
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-8">
+                <h1 class="text-3xl mb-4 text-center">
+                    Ubah Post: <strong class="font-bold">{{ $post->title }}</strong>
+                </h1>
                 <form action="{{  route('post.update', $post->id) }}" 
                 enctype="multipart/form-data" method="post">
 
                     @csrf
                     @method('put')
+                    
+                    <!-- Image Preview -->
+                    <div id="image-preview-container" class="flex justify-center flex-col items-center mb-4"></div>
 
-                    <!-- Image -->
+                    <!-- Current Image -->
                     @if ($post->imageUrl())
                     <div class="mb-8 flex justify-center flex-col items-center" id="current-image-container">
-                        <p class="text-sm text-gray-500 mb-1">Foto thumbnail sekarang:</p>
                         <img src="{{ $post->imageUrl('preview') }}" alt="{{ $post->title }}" class="rounded-md max-h-64">
+                        <p class="text-sm text-gray-500 mt-1">Foto thumbnail saat ini</p>
                     </div>
                     @endif
                 
@@ -24,7 +27,6 @@
                         <x-input-label for="image" :value="__('Foto Thumbnail')" />
                         <x-text-input id="image" class="block mt-1 w-full" type="file" name="image"
                             :value="old('image')" autofocus />
-                        <div id="image-preview-container" class="mt-2"></div>
                         <x-input-error :messages="$errors->get('image')" class="mt-2" />
                     </div>
 
@@ -59,18 +61,18 @@
                         <x-input-error :messages="$errors->get('category_id')" class="mt-2" />
                     </div>
 
-<!-- Content -->
-<div class="mt-4">
-    <x-input-label for="content" :value="__('Konten')" />
-    <div class="main-container">
-        <div class="editor-container editor-container_classic-editor" id="editor-container">
-            <div class="editor-container__editor">
-                <textarea id="editor" name="content">{{ old('content', $post->content) }}</textarea>
-            </div>
-        </div>
-    </div>
-    <x-input-error :messages="$errors->get('content')" class="mt-2" />
-</div>
+                    <!-- Content -->
+                    <div class="mt-4">
+                        <x-input-label for="content" :value="__('Konten')" />
+                        <div class="main-container">
+                            <div class="editor-container editor-container_classic-editor" id="editor-container">
+                                <div class="editor-container__editor">
+                                    <textarea id="editor" name="content">{{ old('content', $post->content) }}</textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <x-input-error :messages="$errors->get('content')" class="mt-2" />
+                    </div>
                     
                     <!-- Published At -->
                     <div class="mt-4">
@@ -100,14 +102,6 @@
     const previewContainer = document.getElementById('image-preview-container');
     const currentImageContainer = document.getElementById('current-image-container');
     
-    // Center the current image if it exists
-    if (currentImageContainer) {
-        const currentImg = currentImageContainer.querySelector('img');
-        if (currentImg) {
-            currentImageContainer.classList.add('flex', 'justify-center', 'flex-col', 'items-center');
-        }
-    }
-    
     imageInput.addEventListener('change', function() {
         previewContainer.innerHTML = '';
         
@@ -117,15 +111,12 @@
                 currentImageContainer.style.display = 'none';
             }
             
-            // Add flex container for centering
-            previewContainer.className = 'mt-2 flex justify-center flex-col items-center';
-            
             const reader = new FileReader();
             
             reader.onload = function(e) {
                 const preview = document.createElement('img');
                 preview.src = e.target.result;
-                preview.className = 'mt-2 rounded-md max-h-64 max-w-full';
+                preview.className = 'rounded-md max-h-64 max-w-full';
                 preview.alt = 'Foto thumbnail baru';
                 
                 const previewText = document.createElement('p');

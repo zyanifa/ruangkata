@@ -1,4 +1,8 @@
 <x-guest-layout>
+    <h2 class="text-xl font-bold mb-4 text-gray-800 text-center">
+        {{ __('Buat Akun') }}
+    </h2>
+    
     <form method="POST" action="{{ route('register') }}">
         @csrf
 
