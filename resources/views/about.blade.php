@@ -66,7 +66,7 @@
                                     <h3 class="font-semibold text-gray-800">Interaksi Sosial</h3>
                                 </div>
                                 <p class="text-gray-600 text-sm">
-                                    Fitur like, komentar, dan follow untuk mendukung interaksi antar pengguna dan membangun komunitas.
+                                    Fitur clap, komentar, dan follow untuk mendukung interaksi antar pengguna dan membangun komunitas.
                                 </p>
                             </div>
                             

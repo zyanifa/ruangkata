@@ -50,7 +50,7 @@ class ListUserPosts extends Page implements Tables\Contracts\HasTable
                     ->sortable(),
                 TextColumn::make('claps_count')
                     ->counts('claps')
-                    ->label('Jumlah Like')
+                    ->label('Jumlah Clap')
                     ->sortable(),
                 TextColumn::make('created_at')
                     ->label('Dibuat pada')
