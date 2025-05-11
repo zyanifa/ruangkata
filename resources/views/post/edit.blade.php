@@ -78,7 +78,7 @@
                     <div class="mt-4">
                         <x-input-label for="published_at" :value="__('Waktu Publikasi')" />
                         <x-text-input id="published_at" class="block mt-1 w-full" type="datetime-local" name="published_at"
-                            :value="old('published_at', $post->published_at)" autofocus />
+                            :value="old('published_at', $post->published_at)" min="{{ now()->format('Y-m-d\TH:i') }}" autofocus />
                         <x-input-error :messages="$errors->get('published_at')" class="mt-2" />
                     </div>
 

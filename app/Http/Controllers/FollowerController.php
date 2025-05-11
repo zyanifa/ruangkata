@@ -13,7 +13,7 @@ class FollowerController extends Controller
         
         $user->followers()->toggle(auth()->user());
 
-        $message = $wasFollowing ? 'Berhasil berhenti mengikuti' : 'Berhasil mengikuti';
+        $message = $wasFollowing ? 'Berhasil unfollow!' : 'Berhasil follow!';
         
         return response()->json([
             'followersCount' => $user->followers()->count(),
