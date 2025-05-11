@@ -63,17 +63,17 @@ class PostController extends Controller
 
         $data['user_id'] = Auth::id();
 
-        // Sanitize the content to remove harmful HTML tags
-        // $data['content'] = strip_tags($data['content'], '<p><a><b><i><strong><em><ul><ol><li><br><h1><h2><h3><h4><h5><h6><pre><code><img>');
-
         $post = Post::create($data);
 
         $post->addMediaFromRequest('image')
             ->toMediaCollection();
 
-        return redirect()->route('post.show', ['username' => $post->user->username, 'post' => $post->slug]);
+        return redirect()->route('post.show', ['username' => $post->user->username, 'post' => $post->slug])
+            ->with('toast', [
+                'message' => 'Post berhasil dibuat!',
+                'type' => 'success'
+            ]);
     }
-
     /**
      * Display the specified resource.
      */
@@ -117,19 +117,21 @@ class PostController extends Controller
         if ($post->user_id !== Auth::id()) {
             abort(403);
         }
+        
         $data = $request->validated();
-
-        // Sanitize the content to allow only safe HTML tags
-        // $data['content'] = strip_tags($data['content'], '<p><a><b><i><strong><em><ul><ol><li><br><h1><h2><h3><h4><h5><h6><pre><code><img>');
-
         $post->update($data);
-
-        if ($data['image'] ?? false) {
+        
+        if ($request->hasFile('image')) {
+            $post->clearMediaCollection();
             $post->addMediaFromRequest('image')
                 ->toMediaCollection();
         }
-
-        return redirect()->route('post.show', ['username' => $post->user->username, 'post' => $post->slug]);
+        
+        return redirect()->route('post.show', ['username' => $post->user->username, 'post' => $post->slug])
+            ->with('toast', [
+                'message' => 'Post berhasil diperbarui!',
+                'type' => 'success'
+            ]);
     }
 
     /**
@@ -140,9 +142,14 @@ class PostController extends Controller
         if ($post->user_id !== Auth::id()) {
             abort(403);
         }
+        
         $post->delete();
-
-        return redirect()->route('dashboard');
+        
+        return redirect()->route('dashboard')
+            ->with('toast', [
+                'message' => 'Post berhasil dihapus!',
+                'type' => 'success'
+            ]);
     }
 
     public function category(Request $request, Category $category)

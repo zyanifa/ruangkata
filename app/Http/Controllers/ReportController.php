@@ -62,12 +62,16 @@ class ReportController extends Controller
                 return redirect()->route('post.show', [
                     'username' => $model->user->username,
                     'post' => $model->slug
-                ])->with('success', 'Laporan telah berhasil dikirim.');
+                ])->with('toast', [
+                                'message' => 'Post berhasil dilaporkan!',
+                                'type' => 'success']);
             } elseif ($type === 'comment') {
                 return redirect()->route('post.show', [
                     'username' => $model->post->user->username,
                     'post' => $model->post->slug
-                ])->with('success', 'Laporan telah berhasil dikirim.');
+                ])->with('toast', [
+                                'message' => 'Komentar berhasil dilaporkan!',
+                                'type' => 'success']);
             }
             
         } catch (\Exception $e) {

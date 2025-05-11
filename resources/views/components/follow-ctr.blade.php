@@ -13,6 +13,10 @@
             .then(res => {
                 this.following = !this.following
                 this.followersCount = res.data.followersCount
+                // Show toast notification
+                if (window.showToast) {
+                    window.showToast(res.data.message, 'success');
+                }
             })
             .catch(err => {
                 console.log(err)

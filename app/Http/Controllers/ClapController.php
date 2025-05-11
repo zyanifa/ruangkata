@@ -13,14 +13,17 @@ class ClapController extends Controller
 
         if ($hasClapped) {
             $post->claps()->where('user_id', auth()->id())->delete();
+            $message = 'Berhasil membatalkan clap';
         } else {
             $post->claps()->create([
                 'user_id' => auth()->id(),
             ]);
+            $message = 'Berhasil memberikan clap';
         }
 
         return response()->json([
             'clapsCount' => $post->claps()->count(),
+            'message' => $message
         ]);
     }
 }

@@ -326,3 +326,13 @@ ClassicEditor.create(document.querySelector('#editor'), {
 .catch(error => {
     console.error(error);
 });
+
+window.showToast = function(message, type = 'success', duration = 3000) {
+    window.dispatchEvent(new CustomEvent('toast', { 
+        detail: {
+            message: message,
+            type: type,
+            duration: duration
+        }
+    }));
+};
