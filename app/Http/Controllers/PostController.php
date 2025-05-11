@@ -8,7 +8,8 @@ use App\Models\Post;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Session;
+
 
 class PostController extends Controller
 {
@@ -18,12 +19,15 @@ class PostController extends Controller
     public function index(Request $request)
     {
         $user = auth()->user();
+        $showFollowedOnly = $user && Session::get('show_followed_only', false);
     
         $query = Post::with(['user', 'media'])
             ->where('published_at', '<=', now())
             ->withCount('claps')
             ->latest();
-        if ($user) {
+            
+        // Only filter by followed users if the toggle is on
+        if ($user && $showFollowedOnly) {
             $ids = $user->following()->pluck('users.id')->toArray();
             $ids[] = $user->id;
             $query->whereIn('user_id', $ids);
@@ -155,6 +159,7 @@ class PostController extends Controller
     public function category(Request $request, Category $category)
     {
         $user = auth()->user();
+        $showFollowedOnly = $user && Session::get('show_followed_only', false);
     
         $query = $category->posts()
             ->where('published_at', '<=', now())
@@ -162,11 +167,13 @@ class PostController extends Controller
             ->withCount('claps')
             ->latest();
     
-        if ($user) {
-            $ids = $user->following()->pluck('users.id');
+        // Only filter by followed users if the toggle is on
+        if ($user && $showFollowedOnly) {
+            $ids = $user->following()->pluck('users.id')->toArray();
             $ids[] = $user->id;
             $query->whereIn('user_id', $ids);
         }
+        
         $posts = $query->simplePaginate(5);
         $categories = Category::orderBy('name')->get(); // Sort categories alphabetically
     
@@ -195,16 +202,18 @@ class PostController extends Controller
             ->simplePaginate(5)
             ->appends(['query' => $query]);
         
-        $categories = Category::orderBy('name')->get(); // Sort categories alphabetically
-        
-        if ($request->ajax() || $request->has('ajax')) {
-            return view('post.partials.post-list', ['posts' => $posts])->render();
-        }
-        
-        return view('post.index', [
+        return view('post.search', [
             'posts' => $posts,
             'searchQuery' => $query,
-            'categories' => $categories, // Pass sorted categories
         ]);
     }
+
+        public function toggleFollowedFilter(Request $request)
+        {
+            // Check if the value is "1" (on) or "0" (off)
+            $showFollowedOnly = $request->input('show_followed_only') === '1';
+            Session::put('show_followed_only', $showFollowedOnly);
+            
+            return response()->json(['success' => true, 'followed_only' => $showFollowedOnly]);
+        }
 }

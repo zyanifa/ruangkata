@@ -258,15 +258,15 @@
     transition: opacity 0.3s ease;
   }
 
-  @keyframes spinner-spin {
+.custom-spin {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
     from {
-      transform: rotate(0deg);
+        transform: rotate(0deg);
     }
     to {
-      transform: rotate(360deg);
+        transform: rotate(360deg);
     }
-  }
-  
-  .custom-spin {
-    animation: spinner-spin 1s linear infinite;
-  }
+}

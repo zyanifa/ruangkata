@@ -6,6 +6,7 @@ import collapse from '@alpinejs/collapse';
 import initializeComments from './comments';
 import initializeImagePreview from './post-image-preview';
 import './category-tabs.js';
+import './followed-toggle.js';
 
 Alpine.plugin(collapse);
 window.Alpine = Alpine;

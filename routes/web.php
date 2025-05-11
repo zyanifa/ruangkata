@@ -71,6 +71,9 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/clap/{post}', [ClapController::class, 'clap'])
         ->name('clap');
+    
+    Route::post('/posts/toggle-followed', [PostController::class, 'toggleFollowedFilter'])
+        ->name('posts.toggle-followed');
 });
 
 require __DIR__ . '/auth.php';
