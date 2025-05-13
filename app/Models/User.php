@@ -31,6 +31,7 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia, Filamen
         'email',
         'password',
         'is_admin',
+        'email_verified_at',
     ];
 
     /**
