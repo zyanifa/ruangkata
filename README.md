@@ -1,4 +1,4 @@
-# Ruangkata
+# RuangKata
 RuangKata adalah platform website artikel interaktif berbasis Laravel 12 yang dirancang khusus untuk mahasiswa Fakultas Ilmu Komputer dan Teknologi Informasi Universitas Gunadarma. Platform ini menyediakan wadah untuk mempublikasikan tulisan bertema teknologi, serta mendukung interaksi sosial melalui fitur komentar, clap/unclap, dan follow antar pengguna. RuangKata bertujuan mendorong pengembangan kemampuan menulis teknis dan kolaborasi di lingkungan akademik.
 
 ## Persyaratan
