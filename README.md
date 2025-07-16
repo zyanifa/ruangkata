@@ -1,66 +1,141 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Ruangkata
+RuangKata adalah platform website artikel interaktif berbasis Laravel 12 yang dirancang khusus untuk mahasiswa Fakultas Ilmu Komputer dan Teknologi Informasi Universitas Gunadarma. Platform ini menyediakan wadah untuk mempublikasikan tulisan bertema teknologi, serta mendukung interaksi sosial melalui fitur komentar, clap/unclap, dan follow antar pengguna. RuangKata bertujuan mendorong pengembangan kemampuan menulis teknis dan kolaborasi di lingkungan akademik.
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Persyaratan
+- PHP `^8.2`
+- Composer `2.x`
+- Node.js `^18`
+- npm `^9`
 
-## About Laravel
+## Fitur
+🔐 Autentikasi Pengguna
+- Registrasi, login, dan logout
+- Fitur lupa kata sandi (reset password)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+📝 Manajemen Artikel
+- Membuat, mengedit, dan menghapus artikel bertema teknologi
+- Editor WYSIWYG untuk penulisan konten yang terstruktur
+- Kategorisasi artikel berdasarkan topik
+- Artikel tampil secara publik di halaman utama
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+💬 Interaksi Sosial
+- Clap/unclap pada artikel
+- Komentar pada artikel
+- Fitur follow antar pengguna
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+👤 Profil Pengguna
+- Lihat dan perbarui profil
+- Tampilkan daftar artikel yang pernah ditulis
 
-## Learning Laravel
+🛠️ Dasbor Admin
+- Kelola pengguna, kategori artikel, dan laporan konten
+- Hak akses untuk mengubah dan menghapus data
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+🚩 Lapor Konten
+- Fitur pelaporan artikel atau komentar yang melanggar
+- Notifikasi laporan diteruskan ke dashboard admin
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+🖼️ Manajemen Media
+- Unggah gambar pendukung dalam artikel
+- File media tersimpan dan terstruktur secara otomatis
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+🔒 Manajemen Sesi
+- Manajemen sesi aman untuk pengguna dan admin
+- Fitur logout untuk mengakhiri sesi aktif
 
-## Laravel Sponsors
+## Langkah-langkah Menjalankan Proyek Secara Lokal:
+1. Tekan tombol `<> Code`
+2. Salin link repository menggunakan HTTPS atau SSH
+3. Jalankan perintah `git clone` di terminal Anda.
+4. Masuk ke folder proyek hasil clone
+5. Instal semua dependensi backend dengan perintah `composer install`
+6. Instal semua dependensi frontend dengan perintah `npm install`
+7. Buat file .env dengan perintah `cp .env.example .env`, lalu isi konfigurasi yang diperlukan
+8. Generate application key dengan menjalankan `php artisan key:generate`
+9. Jalankan perintah `php artisan storage:link` untuk menghubungkan direktori penyimpanan
+10. Lakukan migrasi database dengan perintah `php artisan migrate`
+11. (Opsional) Isi data awal ke dalam database dengan perintah `php artisan db:seed`
+12. Compile aset frontend dengan perintah `npm run dev`
+13. Jalankan aplikasi dengan perintah `php artisan serve`
+14. Aplikasi RuangKata akan dapat diakses melalui browser di alamat "http://localhost:8000"
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## Akun Admin
 
-### Premium Partners
+Untuk membuat akun admin, jalankan perintah berikut di terminal: `php artisan make:admin`
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+## Screenshots Halaman Pengguna
+**Halaman Beranda**
+![Halaman Beranda](./dokumentasi_ss/a.pengguna_halaman_beranda.jpg)
 
-## Contributing
+**Halaman Tentang**
+![Halaman Tentang](./dokumentasi_ss/b.pengguna_halaman_tentang.jpg)
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+**Halaman Buat Akun**
+![Halaman Buat Akun](./dokumentasi_ss/c.pengguna_halaman_buat_akun.jpg)
 
-## Code of Conduct
+**Halaman Masuk**
+![Halaman Masuk](./dokumentasi_ss/d.pengguna_halaman_masuk.jpg)
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+**Halaman Profil Pengguna**
+![Halaman Profil Pengguna](./dokumentasi_ss/e.pengguna_halaman_profil_pengguna.jpg)
 
-## Security Vulnerabilities
+**Halaman Reset Kata Sandi**
+![Halaman Reset Kata Sandi](./dokumentasi_ss/f.pengguna_halaman_reset_kata_sandi.jpg)
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+**Halaman Kata Sandi Baru**
+![Halaman Kata Sandi Baru](./dokumentasi_ss/g.pengguna_halaman_kata_sandi_baru.jpg)
 
-## License
+**Halaman Lihat Post**
+![Halaman Lihat Post](./dokumentasi_ss/h.pengguna_halaman_lihat_post.jpg)
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+**Halaman Cari Post**
+![Halaman Cari Post](./dokumentasi_ss/i.pengguna_halaman_cari_post.jpg)
+
+**Halaman Buat Post**
+![Halaman Buat Post](./dokumentasi_ss/j.pengguna_halaman_buat_post.jpg)
+
+**Halaman Ubah Post**
+![Halaman Ubah Post](./dokumentasi_ss/k.pengguna_halaman_ubah_post.jpg)
+
+**Halaman Lapor**
+![Halaman Lapor](./dokumentasi_ss/l.pengguna_halaman_lapor.jpg)
+
+**Halaman Pengaturan**
+![Halaman Pengaturan](./dokumentasi_ss/m.pengguna_halaman_pengaturan.jpg)
+
+## Screenshots Halaman Admin
+**Halaman Masuk**
+![Halaman Masuk](./dokumentasi_ss/a.admin_halaman_masuk.jpg)
+
+**Halaman Dasbor**
+![Halaman Dasbor](./dokumentasi_ss/b.admin_halaman_dasbor.jpg)
+
+**Halaman List Kategori**
+![Halaman List Kategori](./dokumentasi_ss/c.admin_halaman_list_kategori.jpg)
+
+**Halaman Buat Kategori**
+![Halaman Buat Kategori](./dokumentasi_ss/d.admin_halaman_buat_kategori.jpg)
+
+**Halaman Ubah Kategori**
+![Halaman Ubah Kategori](./dokumentasi_ss/e.admin_halaman_ubah_kategori.jpg)
+
+**Halaman List Pengguna**
+![Halaman List Pengguna](./dokumentasi_ss/f.admin_halaman_list_pengguna.jpg)
+
+**Halaman Buat Pengguna**
+![Halaman Buat Pengguna](./dokumentasi_ss/g.admin_halaman_buat_pengguna.jpg)
+
+**Halaman Ubah Pengguna**
+![Halaman Ubah Pengguna](./dokumentasi_ss/h.admin_halaman_ubah_pengguna.jpg)
+
+**Halaman List Laporan Post**
+![Halaman List Laporan Post](./dokumentasi_ss/i.admin_halaman_list_laporan_post.jpg)
+
+**Halaman Detail Laporan Post**
+![Halaman Detail Laporan Post](./dokumentasi_ss/j.admin_halaman_detail_laporan_post.jpg)
+
+**Halaman List Laporan Komentar**
+![Halaman List Laporan Komentar](./dokumentasi_ss/k.admin_halaman_list_laporan_komentar.jpg)
+
+**Halaman Detail Laporan Komentar**
+![Halaman Detail Laporan Komentar](./dokumentasi_ss/l.admin_halaman_detail_laporan_komentar.jpg)
