@@ -1,69 +1,79 @@
 export default function initializeComments() {
-    let currentlyOpenForm = null; // Track the currently open form
+    let currentlyOpenForms = []; // Track the currently open forms (both desktop and mobile)
     
     // Expose these functions to the global scope so they can be called from HTML
     window.toggleEditForm = function(commentId, show) {
-        const contentElement = document.getElementById(`comment-content-${commentId}`);
-        const formElement = document.getElementById(`edit-form-${commentId}`);
+        const contentElements = document.querySelectorAll(`[id="comment-content-${commentId}"]`);
+        const formElements = document.querySelectorAll(`[id="edit-form-${commentId}"]`);
         
         // If we're trying to open a form and another form is already open, close it first
-        if (show && currentlyOpenForm && currentlyOpenForm !== formElement) {
-            // If the current form is an edit form, restore the comment content
-            if (currentlyOpenForm.id.startsWith('edit-form-')) {
-                const currentCommentId = currentlyOpenForm.id.replace('edit-form-', '');
-                document.getElementById(`comment-content-${currentCommentId}`).classList.remove('hidden');
-            }
-            
-            // Hide the currently open form
-            currentlyOpenForm.classList.add('hidden');
-            currentlyOpenForm = null;
+        if (show && currentlyOpenForms.length > 0) {
+            // Close all currently open forms
+            currentlyOpenForms.forEach(openForm => {
+                if (openForm.id.startsWith('edit-form-')) {
+                    const currentCommentId = openForm.id.replace('edit-form-', '');
+                    const contentElements = document.querySelectorAll(`[id="comment-content-${currentCommentId}"]`);
+                    contentElements.forEach(el => el.classList.remove('hidden'));
+                }
+                openForm.classList.add('hidden');
+            });
+            currentlyOpenForms = [];
         }
         
         if (show) {
-            contentElement.classList.add('hidden');
-            formElement.classList.remove('hidden');
-            currentlyOpenForm = formElement;
+            contentElements.forEach(el => el.classList.add('hidden'));
+            formElements.forEach(el => {
+                el.classList.remove('hidden');
+                currentlyOpenForms.push(el);
+            });
         } else {
-            contentElement.classList.remove('hidden');
-            formElement.classList.add('hidden');
-            if (currentlyOpenForm === formElement) {
-                currentlyOpenForm = null;
-            }
+            contentElements.forEach(el => el.classList.remove('hidden'));
+            formElements.forEach(el => el.classList.add('hidden'));
+            currentlyOpenForms = currentlyOpenForms.filter(form => !formElements.includes(form));
         }
     };
     
     window.toggleReplyForm = function(commentId) {
-        const replyForm = document.getElementById(`reply-form-${commentId}`);
+        const replyForms = document.querySelectorAll(`[id="reply-form-${commentId}"]`);
         
-        // If we're trying to open a form and another form is already open, close it first
-        if (!replyForm.classList.contains('hidden') && currentlyOpenForm === replyForm) {
-            // We're closing the current form
-            replyForm.classList.add('hidden');
-            currentlyOpenForm = null;
+        // Check if any form is currently open
+        const isAnyFormOpen = Array.from(replyForms).some(form => !form.classList.contains('hidden'));
+        
+        // If forms are open, close them
+        if (isAnyFormOpen) {
+            replyForms.forEach(form => {
+                form.classList.add('hidden');
+            });
+            currentlyOpenForms = currentlyOpenForms.filter(form => !Array.from(replyForms).includes(form));
             return;
         }
         
-        if (currentlyOpenForm && currentlyOpenForm !== replyForm) {
-            // If the current form is an edit form, restore the comment content
-            if (currentlyOpenForm.id.startsWith('edit-form-')) {
-                const currentCommentId = currentlyOpenForm.id.replace('edit-form-', '');
-                document.getElementById(`comment-content-${currentCommentId}`).classList.remove('hidden');
-            }
-            
-            // Hide the currently open form
-            currentlyOpenForm.classList.add('hidden');
+        // Close any other open forms first
+        if (currentlyOpenForms.length > 0) {
+            currentlyOpenForms.forEach(openForm => {
+                if (openForm.id.startsWith('edit-form-')) {
+                    const currentCommentId = openForm.id.replace('edit-form-', '');
+                    const contentElements = document.querySelectorAll(`[id="comment-content-${currentCommentId}"]`);
+                    contentElements.forEach(el => el.classList.remove('hidden'));
+                }
+                openForm.classList.add('hidden');
+            });
+            currentlyOpenForms = [];
         }
         
-        // Toggle the reply form visibility
-        replyForm.classList.toggle('hidden');
-        
-        // Update the currently open form reference
-        currentlyOpenForm = replyForm.classList.contains('hidden') ? null : replyForm;
+        // Open the reply forms
+        replyForms.forEach(form => {
+            form.classList.remove('hidden');
+            currentlyOpenForms.push(form);
+        });
     };
     
     window.deleteComment = function(commentId) {
         if (confirm('Apakah Anda yakin ingin menghapus komentar ini?')) {
-            document.getElementById(`delete-form-${commentId}`).submit();
+            const deleteForm = document.querySelector(`[id="delete-form-${commentId}"]`);
+            if (deleteForm) {
+                deleteForm.submit();
+            }
         }
     };
 
