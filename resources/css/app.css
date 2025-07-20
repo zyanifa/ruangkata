@@ -12,7 +12,8 @@
 
 .main-container {
     font-family: 'Lato';
-    width: fit-content;
+    width: 100%;
+    max-width: 795px;
     margin-left: auto;
     margin-right: auto;
 }
@@ -24,7 +25,8 @@
 }
 
 .editor-container_classic-editor .editor-container__editor {
-    min-width: 0px;
+    width: 100%;
+    min-width: 320px;
     max-width: 795px;
 }
 
@@ -33,11 +35,37 @@
     min-height: 450px !important; /* Minimum height */
     resize: vertical !important;  /* Allow vertical resize */
     overflow: auto !important;    /* Show scrollbar when needed */
+    width: 100% !important;      /* Ensure full width */
 }
 
 /* Adjust the editor container */
 #editor {
     min-height: 450px;
+    width: 100%;
+}
+
+/* Mobile-specific CKEditor fixes */
+@media (max-width: 768px) {
+    .main-container {
+        width: 100%;
+        margin: 0;
+        padding: 0 4px;
+    }
+    
+    .editor-container_classic-editor .editor-container__editor {
+        min-width: 100%;
+        max-width: 100%;
+    }
+    
+    .ck-editor__editable_inline {
+        min-height: 300px !important;
+        font-size: 16px !important; /* Prevent zoom on iOS */
+    }
+    
+    /* Fix for CKEditor toolbar on mobile */
+    .ck.ck-editor__top .ck-sticky-panel .ck-toolbar {
+        flex-wrap: wrap;
+    }
 }
 
 /* CKEditor content styling - shared between editor and display */
